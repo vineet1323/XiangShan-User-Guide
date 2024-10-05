@@ -73,15 +73,15 @@ MMU 负责将虚拟地址翻译成物理地址，并用翻译得到的物理地�
 
 昆明湖架构的物理地址为 36 位，虚拟地址和物理地址的结构如图所示。遍历页表需要进行三次内存访问，需要通过 TLB 对页表做缓存。
 
-![香山虚拟地址结构.svg](../resources/vaddr.svg)
+![香山虚拟地址结构.svg](figs/vaddr.svg)
 
-![香山物理地址结构.svg](../resources/paddr.svg)
+![香山物理地址结构.svg](figs/paddr.svg)
 
 在进行地址翻译时，前端取指通过 ITLB 进行地址翻译，后端访存通过 DTLB 进行地址翻译。ITLB 和 DTLB 如果 miss，会通过 Repeater 向 L2 TLB 发送请求。前端取指和后端访存对TLB均采用非阻塞式访问。
 
 昆明湖 V2R2-930 页表用于存储下级页表的入口地址或者最终页表的物理信息，页表结构如图 6.3 所示
 
-![页表结构.png](../resources/pte.png)
+![页表结构.png](figs/pte.png)
 
 昆明湖 V2R2-930 页表结构各bit属性：
 
@@ -97,7 +97,7 @@ menvcfg 寄存器的 PBMTE 位）
 - SVPBMT 中未涉及到的 PMA 属性，以原来物理地址的 PMA 为准，强制覆盖的属性，以 PBMT 为
 准。
 
-![pmbt.png](../resources/pmbt.png)
+![pmbt.png](figs/pmbt.png)
 
 **RSW：Reserved for use by Supervisor softWare**
 
@@ -140,7 +140,7 @@ Dcache/内存，得到 64-bit 一级页表 PTE;
 
 CPU 根据 vsatp 与 hgatp 开启两阶段翻译，vsatp 结构如下图所示（昆明湖 V2R2-930 中 SXLEN 固定为 64）
 
-![vsatp.png](../resources/vsatp.png)
+![vsatp.png](figs/vsatp.png)
 
 vsatp 控制 VS-stage 阶段翻译，一般默认 vsatp 保持开启，即在虚拟化模式或者执行虚拟化访存指令时，默认开启 VS-stage 阶段地址翻译。
 
@@ -154,13 +154,13 @@ hgatp 控制 G-stage 阶段翻译，hgatp 结构与翻译模式如下图所示
 
 昆明湖 V2R2-930 使用 Sv39x4 分页机制，该机制的虚拟地址结构如下图所示
 
-![sv39x4.svg](../resources/sv39x4.svg)
+![sv39x4.svg](figs/sv39x4.svg)
 
 VS-stage 负责将客户机虚拟地址转换成客户机物理地址，G-stage 负责将客户机的物理地址转换成主机的物理地址。第一阶段的翻译和非虚拟化的翻译过程基本一致，第二阶段的翻译在 PTW 与 LLPTW 模块中进行，查询逻辑为：首先在 Page Cache 中查找，如果找到则返回给 PTW 或者 LLPTW，如果没找到就进入 HPTW 进行翻译，由 HPTW 返回并填入 Page Cache。
 
 在两阶段地址翻译中，第一阶段翻译得到的地址（包括翻译过程中计算得到的页表地址）均为客户机的物理地址，需要进行第二阶段翻译得到真实的物理地址后才能进行访存读取页表。逻辑上的翻译过程如下图所示。
 
-![两阶段地址翻译.svg](../resources/2steptranslate.svg)
+![两阶段地址翻译.svg](figs/2steptranslate.svg)
 
 #### 系统控制寄存器
 
@@ -224,7 +224,7 @@ PMP 寄存器的地址空间如下表
 
 其中，PMP 配置寄存器 pmpcfg0，pmpcfg2 的布局如图所示
 
-![pmp.png](../resources/pmp.png)
+<!-- ![pmp.png](figs/pmp.png) -->
 
 PMP 配置寄存器的格式如下表
 
@@ -273,7 +273,7 @@ PMA 寄存器的地址空间如下表
 
 其中，pmacfg0、pmacfg2 的布局如图所示
 
-![pma.png](../resources/pma.png)
+![pma.png](figs/pma.png)
 
 PMA 配置寄存器的格式如下表
 

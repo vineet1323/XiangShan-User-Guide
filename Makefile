@@ -14,6 +14,9 @@ SRCS += docs/bus-interface.md
 SRCS += docs/debug.md
 SRCS += docs/performance-monitor.md
 
+SVG_FIGS := $(wildcard docs/figs/*.svg)
+PDF_FIGS := $(patsubst docs/figs/%.svg, build/figs/%.pdf, $(SVG_FIGS))
+
 DEPS =
 DEPS += resources/meta-vars.lua
 DEPS += resources/template.tex
@@ -24,18 +27,24 @@ PANDOC_FLAGS += --table-of-contents
 PANDOC_FLAGS += --number-sections
 PANDOC_FLAGS += --pdf-engine=xelatex
 PANDOC_FLAGS += --lua-filter=resources/meta-vars.lua
+PANDOC_FLAGS += --lua-filter=resources/svg-to-pdf.lua
 PANDOC_FLAGS += --template=resources/template.tex
 
 all: xiangshan-user-guide.pdf
 
 clean:
-	rm -f xiangshan-user-guide.tex
+	rm -f xiangshan-user-guide.tex xiangshan-user-guide.pdf *.aux *.log *.toc
+	rm -rf build
+
+build/figs/%.pdf: docs/figs/%.svg
+	mkdir -p build/figs
+	rsvg-convert -f pdf -o $@ $<
 
 xiangshan-user-guide.tex: $(SRCS) $(DEPS)
 	pandoc $(SRCS) $(PANDOC_FLAGS) -s -o $@
 	sed -i 's/@{}//g' $@
-    
-xiangshan-user-guide.pdf: xiangshan-user-guide.tex
+
+xiangshan-user-guide.pdf: xiangshan-user-guide.tex $(PDF_FIGS)
 	xelatex $^
 	xelatex $^
 	xelatex $^

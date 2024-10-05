@@ -13,10 +13,10 @@ file_authors_:
 调试接口在整个 CPU 调试环境中的位置如下图所示。
 其中，调试软件和调试代理服务程序通过网络互联，调试代理服务程序与调试器通过 Jtag 仿真器连接，
 调试器与 Jtag 仿真器的调试接口以 JTAG 模式通信。
-![debug module](../resources/debugmodule.svg "debug module")
+![debug module](figs/debugmodule.svg "debug module")
 
 在chi版本中，调试器与hart之间的连接以及时钟域关系如下图所示：
-![debug2harts](../resources/debug2harts.svg "debug2harts")
+![debug2harts](figs/debug2harts.svg "debug2harts")
 
 当前昆明湖debug module实现的情况如下：
 
