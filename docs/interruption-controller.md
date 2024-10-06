@@ -9,7 +9,7 @@ file_authors_:
 
 ### CLINT 中断控制器
 
-#### 概要介绍
+#### 概要
 
 CLINT 为 HART 提供 M 特权级下的软件中断，以及 M 特权级下的 time 定时中断，以及 64bit time 计时器。
 
@@ -28,12 +28,12 @@ Table: CLINT 的寄存器排布
 
 ### IMSIC 中断控制器
 
-### 概要介绍
+#### 概要
 
 IMSIC 作为 RISCV 的外部中断控制器之一，负责 MSI 中断的接收与传递，涵盖 M, S, VS 特权级下的中断上报 。
 每种特权级下的中断配置通过 IMSIC interrupt file MMIO 空间实现，默认支持 interrupt file 数目 7 个： M, S,5 个 VS interrupt file.默认支持有效中断号：1-255.
 
-### 寄存器映射
+#### 寄存器映射
 
 DEVICE 通过发送中断 ID 到 IMSIC 内部 interrupt file MMIO 空间，从而实现 MSI 的发送。
 RISCV AIA SPEC明确规定，多 interrupt files 场景下, Supervisor-level 只能访问 all Supervisor-level and guest interrupt files,不能访问 Machine-level interrupt files.
