@@ -2,29 +2,67 @@
 file_authors_:
 - zengjinhong <zengjinhong21@mails.ucas.ac.cn>
 ---
-## 处理器模式与控制寄存器
+## 处理器模式与控制状态寄存器
 
 ### 处理器模式
 
-{{var_processor_name}} 支持 RISC-V 特权架构手册规定的以下 5 种特权模式。
+{{var_processor_name}} 支持 RISC-V 特权架构手册规定的以下 6 种特权模式。
 
-Table: {{var_processor_name}} 支持的特权级列表
+Table: {{var_processor_name}} 支持的特权模式列表
 
-| 名称                                    | 缩写 | PRIV | V |
-| --------------------------------------- | :--: | :--: | :-: |
-| 机器模式（Machine mode）                |  M  |  3  | 0 |
-| 监管模式（Supervisor mode）             | HS/S |  1  | 0 |
-| 用户模式（User mode）                   |  U  |  0  | 0 |
-| 虚拟监管模式（Virtual supervisor mode） |  VS  |  1  | 1 |
-| 虚拟用户模式（Virtual user mode）       |  VU  |  0  | 1 |
+| 名称                                    | 缩写  |  PRV  |   V   |
+| --------------------------------------- | :---: | :---: | :---: |
+| 机器模式（Machine mode）                |   M   |   3   |   0   |
+| 监管模式（Supervisor mode）             | HS/S  |   1   |   0   |
+| 用户模式（User mode）                   |   U   |   0   |   0   |
+| 虚拟监管模式（Virtual supervisor mode） |  VS   |   1   |   1   |
+| 虚拟用户模式（Virtual user mode）       |  VU   |   0   |   1   |
+| 调试模式（Debug mode）                  |   D   |       |       |
 
-当 V 关闭时，{{var_processor_name}} 支持 RISC-V 的三种特权模式：Machine-mode（机器模式）、Supervisor-mode（监管模式）以及 User-mode（用户模式）（在下面分别称为 M 模式，S 模式，U 模式）。三种模式在对寄存器的访问、特权指令的使用、内存空间的访问上存在区别，其中 M 模式的权限最高，U 模式的权限最低。{{var_processor_name}} 初始化时处在 M 模式。
+机器模式（Machine mode，M 模式）由机器级 ISA 规定，具有最高的权限。M 模式通常用于机器固件，具有以下特性：
 
-* U 模式：该模式下通常运行常规应用程序，只能访问指定给普通用户模式的寄存器，避免其接触特权信息。
-* S 模式：该模式下通常运行操作系统，它可以访问除了机器模式的寄存器以外的寄存器，它协同调度常规用户程序，为它们提供管理与服务。
-* M 模式：该模式拥有最高权限，拥有所有资源的使用权。
+* M 模式下可以访问全部的 M、S、H、VS、U CSR，但不可访问部分调试模式 CSR。
+* M 模式通常以物理地址取指、访存，不进行虚拟地址翻译，但以下情况除外：
+  * `mstatus` .MPRV = 1 时，加载（Load）和存储（Store）操作按 MPP 字段指定的模式进行虚拟地址翻译。
+  * 使用 HLV、HLVX、HSV 等虚拟机加载存储指令时，按照 `hstatus` 字段的 SPVP 字段指定的虚拟模式（VS 或 VU）进行两阶段地址翻译。
+* M 模式取指、访存通常不进行 PMP 检查，默认情况下具有权限，但以下情况除外：
+  * 加载、存储操作按照上述条件以其他特权模式执行时，按照其特权模式进行 PMP 检查。
+  * 某个 PMP 项被锁定时，取指、访存操作均需检查此 PMP 项权限。
 
-当 V 开启时，{{var_processor_name}} 支持 H 扩展，此时具有四种特权模式：Machine-mode（机器模式）、Hyervisor-mode（虚拟机模式）、Virtual-supervisor-mode（虚拟监管模式）、Virtual-user-mode（虚拟用户模式），其中权限高低为，M > HS > VS > VU。
+监管模式（Supervisor mode，S 模式）由监管级 ISA 规定，虚拟化扩展将之扩充为为虚拟机管理扩展的监管模式（Hypervisor-extended supervisor mode，HS 模式）。S/HS 模式通常用于操作系统和虚拟机管理程序，其具有以下特性：
+
+* S/HS 模式下可访问 S、H、VS、U CSR，不可访问 M CSR 和调试模式 CSR。
+* S 模式的取值、访存通常需要根据 satp 寄存器进行虚拟地址翻译，但以下情况除外：
+  * 使用 HLV、HLVX、HSV 等虚拟机加载存储指令时，按照 `hstatus` .SPVP 字段指定的虚拟模式（VS 或 VU）进行两阶段地址翻译。
+* S 模式总是需要进行 PMP 检查。
+* S 模式不可执行 M 模式特权指令。
+
+用户模式（User mode，U 模式）具有以下特性：
+
+* U 模式仅可访问非特权 CSR，主要包括浮点、向量和非特权计数器 CSR。
+* U 模式的取值、访存通常需要根据 satp 寄存器进行虚拟地址翻译，但以下情况除外：
+  * 当 `hstatus` .HU = 1 时，使用 HLV、HLVX、HSV 等虚拟机加载存储指令时，按照 `hstatus` .SPVP 字段指定的虚拟模式（VS 或 VU）进行两阶段地址翻译。
+* U 模式总是需要进行 PMP 检查。
+* U 模式通常不可执行特权指令，部分情况下存在例外。
+
+虚拟监管模式（Virtual supervisor mode，VS 模式）由虚拟化扩展引入，具有以下特性：
+
+* VS 模式下可访问 S、U CSR，但不可访问 M、H、VS CSR。
+* VS 模式下访问特定的 S 模式寄存器，会被重定向到对应的 VS 寄存器。
+* VS 模式下的取值、访存通常需要根据 hgatp、vsatp 寄存器进行两阶段地址翻译。
+* VS 模式总是需要进行 PMP 检查。
+* VS 模式不可执行 M 模式特权指令，亦不可执行 H 特权指令。
+
+虚拟用户模式（Virtual user mode，VU 模式）由虚拟化扩展引入，具有以下特性：
+
+* VU 模式仅可访问非特权 CSR，主要包括浮点、向量和非特权计数器 CSR。
+* VU 模式下的取值、访存通常需要根据 hgatp、vsatp 寄存器进行两阶段地址翻译。
+* VU 模式总是需要进行 PMP 检查。
+* VU 模式通常不可执行特权指令。
+
+调试模式（Debug mode，Debug 模式）由调试扩展（Debug 扩展）引入，其特性和细节请参考“调试”章节。
+
+{{var_processor_name}} 初始化时处在 M 模式。对于一般场景，各模式权限高低为 M > S > U；对于虚拟化场景，各模式权限高低为 M > HS > VS > VU。
 
 ### 控制和状态寄存器（Control and Status Registers）
 
