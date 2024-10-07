@@ -15,7 +15,7 @@ file_authors_:
 
 {{var_processor_name}} 的核内子系统主要包括：取指令单元（IFU）、指令译码单元（IDU）、重命名单元（Rename）、
 乱序调度单元（Dispatch and Issue）、整数运算单元（IntExu）、浮点运算单元（FPExu）、向量运算单元（VecExu）、
-存储单元（LSU）、重排序缓存（ROB）、内存管理单元（MMU）和物理内存保护单元（PMP/PMA）。
+存储单元（LSU）、重排序缓存（ROB）、内存管理单元（MMU）、物理内存保护单元（PMP/PMA）和二级高速缓存（L2 Cache）。
 
 #### 取指令单元
 
@@ -86,3 +86,38 @@ PMA 的实现采用了类 PMP 的方式，利用了 PMP Configure 寄存器的�
 PMP 和 PMA 的最小粒度为 4KB，因此不支持 NA4 模式。
 
 具体内容详见[内存模型](./memory-model.md#内存模型)。
+
+#### 二级高速缓存
+
+二级高速缓存采用分 bank 的流水线架构，每个周期可并行处理 xxx 个访问请求，最大访问带宽可达到 xxx 比特。
+默认配置下，L2 Cache 大小为 1MB 分为 4 个 bank，采用 8 路组相联的组织方式，并采用了 inclusive
+的包含策略。
+
+二级高速缓存对外接口可选 CHI Issue B 和 CHI Issue E.b，并进行了跨时钟域和电压域处理。
+
+接口信息详见[总线接口](./bus-interface.md#总线接口)。
+
+### 多核子系统
+
+{{var_processor_name}} 的多核子系统包括中断控制器、计时器和调试系统。
+
+#### 中断控制器
+
+中断控制器分为传入消息信号中断控制器（IMSIC）和处理器核局部中断控制器（CLINT）。IMSIC 默认支持 7 个
+interrupt file（M + S + 5 VS），并默认支持 254 个有效中断号。CLINT 用于处理软件中断和计时器中断。
+
+具体内容详见[中断控制器](./interruption-controller.md#中断控制器)。
+
+#### 计时器
+
+计时器复用了 CLINT 中的 mtime 寄存器，计时器将计时器的值广播到各个核内子系统，以支持核内子系统读取 time
+寄存器和 Sstc 扩展等功能。
+
+具体内容详见[中断控制器](./interruption-controller.md#中断控制器)。
+
+#### 调试系统
+
+昆明湖调试系统兼容 RISC-V Debug V0.13 手册标准，对外调试接口支持 JTAG。通过一个共享的 JTAG
+接口对不同的核内子系统进行调试。
+
+具体内容详见[调试](./debug.md#调试)章节。
