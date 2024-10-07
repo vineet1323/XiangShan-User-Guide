@@ -164,9 +164,9 @@ VS-stage 负责将客户机虚拟地址转换成客户机物理地址，G-stage 
 
 在两阶段地址翻译中，第一阶段翻译得到的地址（包括翻译过程中计算得到的页表地址）均为客户机的物理地址，需要进行第二阶段翻译得到真实的物理地址后才能进行访存读取页表。逻辑上的 Sv39x4 与 Sv48x4 翻译过程如下图所示。
 
-![Sv39x4 两阶段地址翻译](figs/Sv39x4translate.png)
+![VS 阶段为 Sv39、G 阶段为 Sv39x4 的两阶段地址翻译](figs/two-stage-translation-sv39-sv39x4.svg)
 
-![Sv48x4 两阶段地址翻译](figs/Sv48x4translate.png)
+![VS 阶段为 Sv48、G 阶段为 Sv48x4 的两阶段地址翻译](figs/two-stage-translation-sv48-sv48x4.svg)
 
 #### 系统控制寄存器
 
