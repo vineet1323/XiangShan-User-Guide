@@ -1,6 +1,7 @@
 ---
 file_authors_:
 - zengjinhong <zengjinhong21@mails.ucas.ac.cn>
+- Xu Zefan <xuzefan@mail.ustc.edu.cn>
 ---
 
 ## 特权模式与控制状态寄存器 {#sec:mode-and-csr}
@@ -20,6 +21,10 @@ Table: {{var_processor_name}} 支持的特权模式列表
 | 虚拟用户模式（Virtual user mode）       |  VU   |   0   |   1   |
 | 调试模式（Debug mode）                  |   D   |       |       |
 
+{{var_processor_name}} 初始化时处在 M 模式。对于一般场景，各模式权限高低为 M > S > U；对于虚拟化场景，各模式权限高低为 M > HS > VS > VU。
+
+#### 机器模式
+
 机器模式（Machine mode，M 模式）由机器级 ISA 规定，具有最高的权限。M 模式通常用于机器固件，具有以下特性：
 
 * M 模式下可以访问全部的 M、S、H、VS、U CSR，但不可访问部分调试模式 CSR。
@@ -30,6 +35,8 @@ Table: {{var_processor_name}} 支持的特权模式列表
   * 加载、存储操作按照上述条件以其他特权模式执行时，按照其特权模式进行 PMP 检查。
   * 某个 PMP 项被锁定时，取指、访存操作均需检查此 PMP 项权限。
 
+#### 监管模式
+
 监管模式（Supervisor mode，S 模式）由监管级 ISA 规定，虚拟化扩展将之扩充为为虚拟机管理扩展的监管模式（Hypervisor-extended supervisor mode，HS 模式）。S/HS 模式通常用于操作系统和虚拟机管理程序，其具有以下特性：
 
 * S/HS 模式下可访问 S、H、VS、U CSR，不可访问 M CSR 和调试模式 CSR。
@@ -37,6 +44,8 @@ Table: {{var_processor_name}} 支持的特权模式列表
   * 使用 HLV、HLVX、HSV 等虚拟机加载存储指令时，按照 `hstatus` .SPVP 字段指定的虚拟模式（VS 或 VU）进行两阶段地址翻译。
 * S 模式总是需要进行 PMP 检查。
 * S 模式不可执行 M 模式特权指令。
+
+#### 用户模式
 
 用户模式（User mode，U 模式）具有以下特性：
 
@@ -46,6 +55,8 @@ Table: {{var_processor_name}} 支持的特权模式列表
 * U 模式总是需要进行 PMP 检查。
 * U 模式通常不可执行特权指令，部分情况下存在例外。
 
+#### 虚拟监管模式
+
 虚拟监管模式（Virtual supervisor mode，VS 模式）由虚拟化扩展引入，具有以下特性：
 
 * VS 模式下可访问 S、U CSR，但不可访问 M、H、VS CSR。
@@ -54,6 +65,8 @@ Table: {{var_processor_name}} 支持的特权模式列表
 * VS 模式总是需要进行 PMP 检查。
 * VS 模式不可执行 M 模式特权指令，亦不可执行 H 特权指令。
 
+#### 虚拟用户模式
+
 虚拟用户模式（Virtual user mode，VU 模式）由虚拟化扩展引入，具有以下特性：
 
 * VU 模式仅可访问非特权 CSR，主要包括浮点、向量和非特权计数器 CSR。
@@ -61,9 +74,9 @@ Table: {{var_processor_name}} 支持的特权模式列表
 * VU 模式总是需要进行 PMP 检查。
 * VU 模式通常不可执行特权指令。
 
-调试模式（Debug mode，Debug 模式）由调试扩展（Debug 扩展）引入，其特性和细节请参考“调试”章节。
+#### 调试模式
 
-{{var_processor_name}} 初始化时处在 M 模式。对于一般场景，各模式权限高低为 M > S > U；对于虚拟化场景，各模式权限高低为 M > HS > VS > VU。
+调试模式（Debug mode，Debug 模式）由调试扩展（Debug 扩展）引入，其特性和细节请参考 [@sec:debug] [调试](debug.md)。
 
 ### 控制和状态寄存器（Control and Status Registers）
 
