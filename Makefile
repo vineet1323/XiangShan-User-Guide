@@ -28,6 +28,7 @@ PANDOC_FLAGS += --number-sections
 PANDOC_FLAGS += --pdf-engine=xelatex
 PANDOC_FLAGS += --lua-filter=resources/meta-vars.lua
 PANDOC_FLAGS += --lua-filter=resources/svg-to-pdf.lua
+PANDOC_FLAGS += --lua-filter=resources/remove-md-links.lua
 PANDOC_FLAGS += --filter pandoc-crossref
 PANDOC_FLAGS += --template=resources/template.tex
 
