@@ -3,13 +3,13 @@ file_authors_:
 - Tang Haojin <tanghaojin@outlook.com> 
 ---
 
-## 处理器简介
+## 处理器简介 {#sec:processor}
 
 ### 结构框图
 
-{{var_processor_name}} 的结构框图如 [@fig:微架构框图] 所示。
+{{var_processor_name}} 的结构框图如 [@fig:kmh-multicore] 所示。
 
-![{{var_processor_name}} 微架构框图](figs/kmh-multicore.svg){#fig:微架构框图}
+![{{var_processor_name}} 微架构框图](figs/kmh-multicore.svg){#fig:kmh-multicore}
 
 ### 核内子系统
 
@@ -73,7 +73,7 @@ DCache 缺失率，提高访存效率。当 DCache 缺失后，支持总线的�
 内存管理单元（MMU）支持 Sv39 和 Sv48，可以将 39 位 或 48 位虚拟地址转换为 48 位物理地址。
 支持 H 拓展及两阶段地址翻译，支持 Sv39x4 和 Sv48x4。也支持 PBMT 扩展。
 
-具体内容详见[内存模型](./memory-model.md#内存模型)。
+具体内容详见 [@sec:memory-model] [内存模型](memory-model.md)。
 
 #### 物理内存保护单元
 
@@ -85,7 +85,7 @@ PMA 的实现采用了类 PMP 的方式，利用了 PMP Configure 寄存器的�
 
 PMP 和 PMA 的最小粒度为 4KB，因此不支持 NA4 模式。
 
-具体内容详见[内存模型](./memory-model.md#内存模型)。
+具体内容详见 [@sec:memory-model] [内存模型](memory-model.md)。
 
 #### 二级高速缓存
 
@@ -95,7 +95,7 @@ PMP 和 PMA 的最小粒度为 4KB，因此不支持 NA4 模式。
 
 二级高速缓存对外接口可选 CHI Issue B 和 CHI Issue E.b，并进行了跨时钟域和电压域处理。
 
-接口信息详见[总线接口](./bus-interface.md#总线接口)。
+接口信息详见 [@sec:bus-interface] [总线接口](bus-interface.md)。
 
 ### 多核子系统
 
@@ -106,18 +106,18 @@ PMP 和 PMA 的最小粒度为 4KB，因此不支持 NA4 模式。
 中断控制器分为传入消息信号中断控制器（IMSIC）和处理器核局部中断控制器（CLINT）。IMSIC 默认支持 7 个
 interrupt file（M + S + 5 VS），并默认支持 254 个有效中断号。CLINT 用于处理软件中断和计时器中断。
 
-具体内容详见[中断控制器](./interruption-controller.md#中断控制器)。
+具体内容详见 [@sec:nterruption-controller] [中断控制器](nterruption-controller.md)。
 
 #### 计时器
 
 计时器复用了 CLINT 中的 mtime 寄存器，计时器将计时器的值广播到各个核内子系统，以支持核内子系统读取 time
 寄存器和 Sstc 扩展等功能。
 
-具体内容详见[中断控制器](./interruption-controller.md#中断控制器)。
+具体内容详见 [@sec:nterruption-controller] [中断控制器](nterruption-controller.md)。
 
 #### 调试系统
 
 昆明湖调试系统兼容 RISC-V Debug V0.13 手册标准，对外调试接口支持 JTAG。通过一个共享的 JTAG
 接口对不同的核内子系统进行调试。
 
-具体内容详见[调试](./debug.md#调试)章节。
+具体内容详见 [@sec:debug] [调试](debug.md)。

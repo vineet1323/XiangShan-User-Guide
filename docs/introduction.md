@@ -3,7 +3,8 @@ file_authors_:
 - ZHANG Jian <zhangjian@bosc.ac.cn>
 ---
 
-## 概述
+## 概述 {#sec:introduction}
+
 本章是XS-K220的概述。XS-K220是北京开源芯片研究院香山处理器团队（以下简称香山团队）研发的第三代微架构——昆明湖——的V2R2版本，对外称XS-K220。
 
 昆明湖的目标是面向服务器和高性能嵌入式场景的通用CPU，计划通过三次迭代完成这一目标。

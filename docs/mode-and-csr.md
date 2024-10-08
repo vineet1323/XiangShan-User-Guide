@@ -2,7 +2,8 @@
 file_authors_:
 - zengjinhong <zengjinhong21@mails.ucas.ac.cn>
 ---
-## 处理器模式与控制状态寄存器
+
+## 特权模式与控制状态寄存器 {#sec:mode-and-csr}
 
 ### 处理器模式
 

@@ -3,7 +3,7 @@ file_authors_:
 - ChengGuanghui <wissycgh@gmail.com> 
 ---
 
-## 调试
+## 调试 {#sec:debug}
 
 本章是昆明湖的调试模块的设计文档。昆明湖 debug 兼容 RISC-V Debug V0.13 手册标准。对外调试接口支持 JTAG。调试接口是软件与处理器交互的通道。用户可以通过调试接口获取CPU的状态，包括寄存器和存储器内容，以及其他片上设备的信息。支持程序下载。
 

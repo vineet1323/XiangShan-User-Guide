@@ -21,13 +21,14 @@ DEPS =
 DEPS += resources/meta-vars.lua
 DEPS += resources/template.tex
 
-PANDOC_FLAGS += --from=markdown+table_captions+multiline_tables+grid_tables
+PANDOC_FLAGS += --from=markdown+table_captions+multiline_tables+grid_tables+header_attributes
 PANDOC_FLAGS += --top-level-division=part
 PANDOC_FLAGS += --table-of-contents
 PANDOC_FLAGS += --number-sections
 PANDOC_FLAGS += --pdf-engine=xelatex
 PANDOC_FLAGS += --lua-filter=resources/meta-vars.lua
 PANDOC_FLAGS += --lua-filter=resources/svg-to-pdf.lua
+PANDOC_FLAGS += --filter pandoc-crossref
 PANDOC_FLAGS += --template=resources/template.tex
 
 all: xiangshan-user-guide.pdf
