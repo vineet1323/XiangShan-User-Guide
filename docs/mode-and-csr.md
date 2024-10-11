@@ -257,7 +257,7 @@ Table: {{var_processor_name}} 支持的 MRW 的 CSRs 列表
 |    tdata2    | M/Debug | 0x7A2 |  第二个 Debug/Trace 触发器数据寄存器  |      调试寄存器      |
 |    tdata3    | M/Debug | 0x7A3 |  第三个 Debug/Trace 触发器数据寄存器  |      调试寄存器      |
 |     tinfo     | M/Debug | 0x7A4 |      Debug/Trace 触发器信息寄存器      |      调试寄存器      |
-|   tcontrol   | M/Debug | 0x7A2 |        机器模式除法器使能寄存器        |      调试寄存器      |
+|   tcontrol   | M/Debug | 0x7A2 |        机器模式触发器使能寄存器        |      调试寄存器      |
 |   mcontext   | M/Debug | 0x7A3 |          机器模式上下文寄存器          |      调试寄存器      |
 |    pmacfg0    |    M    | 0x7C0 |             PMA配置寄存器0             |       PMA配置       |
 |    pmacfg2    |    M    | 0x7C2 |             PMA配置寄存器2             |       PMA配置       |
