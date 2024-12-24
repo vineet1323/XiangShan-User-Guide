@@ -152,11 +152,11 @@ vsatp 控制 VS-stage 阶段翻译，一般默认 vsatp 保持开启，即在虚
 
 hgatp 控制 G-stage 阶段翻译，hgatp 结构与翻译模式如下图所示
 
-| **位** | **域** | **描述** |
-| --- | --- | --- |
-| [63:60] | MODE | 表示地址转换的模式。该域为 0 时为 Bare mode，不开启地址翻译或地址保护，该域为 8/9 时表示 Sv39x4/Sv48x4 地址转换模式，如果该域为其他值会上报 illegal instruction fault |
-| [57:44] | VMID | 虚拟机标识符。对于 {{var_processor_name}} 采用的 Sv39x4/Sv48x4 地址转换模式，VMID 长度最大值都为 14 |
-| [43:0] | PPN | 表示第二阶段翻译的根页表的物理页号，由物理地址右移 12 位得到 |
+| **位**  | **域** | **描述**                                                       |
+| ------- | ------ | :------------------------------------------------------------ |
+| [63:60] | MODE   | 表示地址转换的模式。该域为 0 时为 Bare mode，不开启地址翻译或地址保护，该域为 8/9 时表示 Sv39x4/Sv48x4 地址转换模式，如果该域为其他值会上报 illegal instruction fault |
+| [57:44] | VMID   | 虚拟机标识符。对于 {{var_processor_name}} 采用的 Sv39x4/Sv48x4 地址转换模式，VMID 长度最大值都为 14 |
+| [43:0]  | PPN    | 表示第二阶段翻译的根页表的物理页号，由物理地址右移 12 位得到 |
 
 {{var_processor_name}} 使用 Sv39x4/Sv48x4 分页机制，两机制的虚拟地址结构如下图所示
 
@@ -178,8 +178,8 @@ VS-stage 负责将客户机虚拟地址转换成客户机物理地址，G-stage 
 
 {{var_processor_name}} 架构支持长度为 16 的 ASID（地址空间标识符），在 SATP 寄存器中保存。SATP 寄存器的格式如表所示。
 
-| **位** | **域** | **描述** |
-| --- | --- | --- |
+| **位**  | **域** | **描述**                                                       |
+| ------- | ------ | :------------------------------------------------------------ |
 | [63:60] | MODE | 表示地址转换的模式。该域为 0 时为 Bare mode，不开启地址翻译或地址保护，该域为 8/9 时表示 Sv39/Sv48 地址转换模式，如果该域为其他值会上报 illegal instruction fault |
 | [59:44] | ASID | 地址空间标识符。ASID 的长度可参数化配置，对于 {{var_processor_name}} 采用的 Sv39/Sv48 地址转换模式，ASID 长度最大值为 16 |
 | [43:0] | PPN | 表示根页表的物理页号，由物理地址右移 12 位得到 |
@@ -237,8 +237,8 @@ PMP 寄存器的地址空间如下表
 
 PMP 配置寄存器的格式如下表
 
-| **位** | **域** | **描述** |
-| --- | --- | --- |
+| **位**  | **域** | **描述**                                                       |
+| ------- | ------ | :------------------------------------------------------------ |
 | 7 | L | 表示该 PMP 表项是否被锁定。该域默认为 0，表示未被锁定；为 1 时表示被锁定，需复位才可解除 |
 | [6:5] | 保留 | 保留位，默认为 0 |
 | [4:3] | A | 表示该 PMP 表项的地址匹配模式。该域默认为 0，表示 PMP 表项被禁用且不匹配任何地址。该域为 1、2、3 时分别表示 TOR、NA4、NAPOT 地址匹配模式 |
@@ -286,8 +286,8 @@ PMA 寄存器的地址空间如下表
 
 PMA 配置寄存器的格式如下表
 
-| **位** | **域** | **描述** |
-| --- | --- | --- |
+| **位**  | **域** | **描述**                                                       |
+| ------- | ------ | :------------------------------------------------------------ |
 | 7 | L | 表示该 PMA 表项是否被锁定。该域默认为 0，表示未被锁定；为 1 时表示被锁定 |
 | 6 | C | 表示该 PMA 表项配置的地址是否可缓存。该域为 1 时表示可缓存，为 0时表示该地址属于 mmio 空间，不可缓存 |
 | 5 | Atomic | 表示该 PMA 表项配置的地址是否允许原子访问。该域为 1 时表示可原子访问，为 1 时表示不可原子访问 |
@@ -305,87 +305,87 @@ PMA 地址寄存器的格式如下表
 
 PMA 寄存器描述的地址空间及属性如下表
 
-| **地址下界** | **地址上界** | **描述** | **属性** |
-| --- | --- | --- | --- |
-| 0x00_0000_0000 | 0x00_0FFF_FFFF | Reserved |  |
-| 0x00_1000_0000 | 0x00_1FFF_FFFF | QSPI Flash | RX |
-| 0x00_2000_0000 | 0x00_2FFF_FFFF | Reserved |  |
-| 0x00_3000_0000 | 0x00_3000_FFFF | GPU(V550) | RW |
-| 0x00_3001_0000 | 0x00_3001_FFFF | G71 | RW |
-| 0x00_3002_0000 | 0x00_3003_FFFF | Reserved |  |
-| 0x00_3004_0000 | 0x00_3004_FFFF | DMA | RW |
-| 0x00_3005_0000 | 0x00_3005_FFFF | SDMMC | RW |
-| 0x00_3006_0000 | 0x00_3015_FFFF | USB | RW |
-| 0x00_3016_0000 | 0x00_3025_FFFF | DATA_CPU_BRIDGE | RW |
-| 0x00_3026_0000 | 0x00_30FF_FFFF | Reserved |  |
-| 0x00_3100_0000 | 0x00_3100_FFFF | QSPI | RW |
-| 0x00_3101_0000 | 0x00_3101_FFFF | GMAC | RW |
-| 0x00_3102_0000 | 0x00_3102_FFFF | HDMI | RW |
-| 0x00_3103_0000 | 0x00_3103_FFFF | HDMI_PHY | RW |
-| 0x00_3104_0000 | 0x00_3105_FFFF | DP | RW |
-| 0x00_3106_0000 | 0x00_3106_FFFF | DDR0 | RW |
-| 0x00_3107_0000 | 0x00_3107_FFFF | DDR0_PHY | RW |
-| 0x00_3108_0000 | 0x00_3108_FFFF | DDR1 | RW |
-| 0x00_3109_0000 | 0x00_3109_FFFF | DDR1_PHY | RW |
-| 0x00_310A_0000 | 0x00_310A_FFFF | IIS | RW |
-| 0x00_310B_0000 | 0x00_310B_FFFF | UART0 | RW |
-| 0x00_310C_0000 | 0x00_310C_FFFF | UART1 | RW |
-| 0x00_310D_0000 | 0x00_310D_FFFF | UART2 | RW |
-| 0x00_310E_0000 | 0x00_310E_FFFF | IIC0 | RW |
-| 0x00_310F_0000 | 0x00_310F_FFFF | IIC1 | RW |
-| 0x00_3110_0000 | 0x00_3110_FFFF | IIC2 | RW |
-| 0x00_3111_0000 | 0x00_3111_FFFF | GPIO | RW |
-| 0x00_3112_0000 | 0x00_3112_FFFF | CRU | RW |
-| 0x00_3113_0000 | 0x00_3113_FFFF | WDT | RW |
-| 0x00_3114_0000 | 0x00_3114_FFFF | USB2_PHY0 | RW |
-| 0x00_3115_0000 | 0x00_3115_FFFF | USB2_PHY1 | RW |
-| 0x00_3116_0000 | 0x00_3116_FFFF | USB2_PHY2 | RW |
-| 0x00_3117_0000 | 0x00_3117_FFFF | USB2_PHY3 | RW |
-| 0x00_3118_0000 | 0x00_3118_FFFF | USB3_PHY0 | RW |
-| 0x00_3119_0000 | 0x00_3119_FFFF | USB3_PHY1 | RW |
-| 0x00_311a_0000 | 0x00_311a_FFFF | USB3_PHY2 | RW |
-| 0x00_311b_0000 | 0x00_311b_FFFF | USB3_PHY3 | RW |
-| 0x00_311c_0000 | 0x00_311c_FFFF | PCIE0_CFG | RW |
-| 0x00_311d_0000 | 0x00_311d_FFFF | PCIE1_CFG | RW |
-| 0x00_311e_0000 | 0x00_311e_FFFF | PCIE2_CFG | RW |
-| 0x00_311f_0000 | 0x00_311f_FFFF | PCIE3_CFG | RW |
-| 0x00_3120_0000 | 0x00_3120_FFFF | SYSCFG | RW |
-| 0x00_3121_0000 | 0x00_3130_FFFF | DATA_CPU_BRIDGE | RW |
-| 0x00_3131_0000 | 0x00_37FF_FFFF | Reserved |  |
-| 0x00_3800_0000 | 0x00_3800_FFFF | CLINT (In cpu) | RW |
-| 0x00_3801_0000 | 0x00_3801_FFFF | Reserved |  |
-| 0x00_3802_0000 | 0x00_3802_0FFF | Debug (In cpu) | RW |
-| 0x00_3802_1000 | 0x00_38FF_FFFF | Reserved |  |
-| 0x00_3900_0000 | 0x00_3900_0FFF | CacheCtrl | RW |
-| 0x00_3900_1000 | 0x00_3900_1FFF | Core Reset | RW |
-| 0x00_3900_2000 | 0x00_3BFF_FFFF | Reserved |  |
-| 0x00_3C00_0000 | 0x00_3FFF_FFFF | PLIC (In cpu) | RW |
-| 0x00_4000_0000 | 0x00_4FFF_FFFF | PCIe0 | RW |
-| 0x00_5000_0000 | 0x00_5FFF_FFFF | PCIe1 | RW |
-| 0x00_6000_0000 | 0x00_6FFF_FFFF | PCIe2 | RW |
-| 0x00_7000_0000 | 0x00_7FFF_FFFF | PCIe3 | RW |
-| 0x00_8000_0000 | 0x1F_FFFF_FFFF | DDR | RWXIDSA |
+| **地址下界**   | **地址上界**   | **描述**        | **属性** |
+| -------------- | -------------- | --------------- | -------- |
+| 0x00_0000_0000 | 0x00_0FFF_FFFF | Reserved        |          |
+| 0x00_1000_0000 | 0x00_1FFF_FFFF | QSPI Flash      | RX       |
+| 0x00_2000_0000 | 0x00_2FFF_FFFF | Reserved        |          |
+| 0x00_3000_0000 | 0x00_3000_FFFF | GPU(V550)       | RW       |
+| 0x00_3001_0000 | 0x00_3001_FFFF | G71             | RW       |
+| 0x00_3002_0000 | 0x00_3003_FFFF | Reserved        |          |
+| 0x00_3004_0000 | 0x00_3004_FFFF | DMA             | RW       |
+| 0x00_3005_0000 | 0x00_3005_FFFF | SDMMC           | RW       |
+| 0x00_3006_0000 | 0x00_3015_FFFF | USB             | RW       |
+| 0x00_3016_0000 | 0x00_3025_FFFF | DATA_CPU_BRIDGE | RW       |
+| 0x00_3026_0000 | 0x00_30FF_FFFF | Reserved        |          |
+| 0x00_3100_0000 | 0x00_3100_FFFF | QSPI            | RW       |
+| 0x00_3101_0000 | 0x00_3101_FFFF | GMAC            | RW       |
+| 0x00_3102_0000 | 0x00_3102_FFFF | HDMI            | RW       |
+| 0x00_3103_0000 | 0x00_3103_FFFF | HDMI_PHY        | RW       |
+| 0x00_3104_0000 | 0x00_3105_FFFF | DP              | RW       |
+| 0x00_3106_0000 | 0x00_3106_FFFF | DDR0            | RW       |
+| 0x00_3107_0000 | 0x00_3107_FFFF | DDR0_PHY        | RW       |
+| 0x00_3108_0000 | 0x00_3108_FFFF | DDR1            | RW       |
+| 0x00_3109_0000 | 0x00_3109_FFFF | DDR1_PHY        | RW       |
+| 0x00_310A_0000 | 0x00_310A_FFFF | IIS             | RW       |
+| 0x00_310B_0000 | 0x00_310B_FFFF | UART0           | RW       |
+| 0x00_310C_0000 | 0x00_310C_FFFF | UART1           | RW       |
+| 0x00_310D_0000 | 0x00_310D_FFFF | UART2           | RW       |
+| 0x00_310E_0000 | 0x00_310E_FFFF | IIC0            | RW       |
+| 0x00_310F_0000 | 0x00_310F_FFFF | IIC1            | RW       |
+| 0x00_3110_0000 | 0x00_3110_FFFF | IIC2            | RW       |
+| 0x00_3111_0000 | 0x00_3111_FFFF | GPIO            | RW       |
+| 0x00_3112_0000 | 0x00_3112_FFFF | CRU             | RW       |
+| 0x00_3113_0000 | 0x00_3113_FFFF | WDT             | RW       |
+| 0x00_3114_0000 | 0x00_3114_FFFF | USB2_PHY0       | RW       |
+| 0x00_3115_0000 | 0x00_3115_FFFF | USB2_PHY1       | RW       |
+| 0x00_3116_0000 | 0x00_3116_FFFF | USB2_PHY2       | RW       |
+| 0x00_3117_0000 | 0x00_3117_FFFF | USB2_PHY3       | RW       |
+| 0x00_3118_0000 | 0x00_3118_FFFF | USB3_PHY0       | RW       |
+| 0x00_3119_0000 | 0x00_3119_FFFF | USB3_PHY1       | RW       |
+| 0x00_311a_0000 | 0x00_311a_FFFF | USB3_PHY2       | RW       |
+| 0x00_311b_0000 | 0x00_311b_FFFF | USB3_PHY3       | RW       |
+| 0x00_311c_0000 | 0x00_311c_FFFF | PCIE0_CFG       | RW       |
+| 0x00_311d_0000 | 0x00_311d_FFFF | PCIE1_CFG       | RW       |
+| 0x00_311e_0000 | 0x00_311e_FFFF | PCIE2_CFG       | RW       |
+| 0x00_311f_0000 | 0x00_311f_FFFF | PCIE3_CFG       | RW       |
+| 0x00_3120_0000 | 0x00_3120_FFFF | SYSCFG          | RW       |
+| 0x00_3121_0000 | 0x00_3130_FFFF | DATA_CPU_BRIDGE | RW       |
+| 0x00_3131_0000 | 0x00_37FF_FFFF | Reserved        |          |
+| 0x00_3800_0000 | 0x00_3800_FFFF | CLINT (In cpu)  | RW       |
+| 0x00_3801_0000 | 0x00_3801_FFFF | Reserved        |          |
+| 0x00_3802_0000 | 0x00_3802_0FFF | Debug (In cpu)  | RW       |
+| 0x00_3802_1000 | 0x00_38FF_FFFF | Reserved        |          |
+| 0x00_3900_0000 | 0x00_3900_0FFF | CacheCtrl       | RW       |
+| 0x00_3900_1000 | 0x00_3900_1FFF | Core Reset      | RW       |
+| 0x00_3900_2000 | 0x00_3BFF_FFFF | Reserved        |          |
+| 0x00_3C00_0000 | 0x00_3FFF_FFFF | PLIC (In cpu)   | RW       |
+| 0x00_4000_0000 | 0x00_4FFF_FFFF | PCIe0           | RW       |
+| 0x00_5000_0000 | 0x00_5FFF_FFFF | PCIe1           | RW       |
+| 0x00_6000_0000 | 0x00_6FFF_FFFF | PCIe2           | RW       |
+| 0x00_7000_0000 | 0x00_7FFF_FFFF | PCIe3           | RW       |
+| 0x00_8000_0000 | 0x1F_FFFF_FFFF | DDR             | RWXIDSA  |
 
 PMA 寄存器的条目信息如下表
 
-| **地址** | **c** | **atomic** | **a** | **x** | **w** | **r** |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0x0 | false | false | 0 | false | false | false |
-| 0x0 | false | false | 0 | false | false | false |
-| 0x0 | false | false | 0 | false | false | false |
-| 0x10000000 | false | false | 1 | false | false | false |
-| 0x20000000 | false | false | 1 | true | false | true |
-| 0x30000000 | false | false | 1 | false | false | false |
-| 0x31310000 | false | false | 1 | false | true | true |
-| 0x38000000 | false | false | 1 | false | false | false |
-| 0x38010000 | false | false | 1 | false | true | true |
-| 0x38020000 | false | false | 1 | false | false | false |
-| 0x38021000 | false | false | 1 | true | true | true |
-| 0x39000000 | false | false | 1 | false | false | false |
-| 0x39002000 | false | false | 1 | false | true | true |
-| 0x3c000000 | false | false | 1 | false | false | false |
-| 0x80000000 | false | false | 1 | false | true | true |
-| 0x480000000 | true | true | 1 | true | true | true |
+| **地址**    | **c** | **atomic** | **a** | **x** | **w** | **r** |
+| ----------- | ----- | ---------- | ----- | ----- | ----- | ----- |
+| 0x0         | false | false      | 0     | false | false | false |
+| 0x0         | false | false      | 0     | false | false | false |
+| 0x0         | false | false      | 0     | false | false | false |
+| 0x10000000  | false | false      | 1     | false | false | false |
+| 0x20000000  | false | false      | 1     | true  | false | true  |
+| 0x30000000  | false | false      | 1     | false | false | false |
+| 0x31310000  | false | false      | 1     | false | true  | true  |
+| 0x38000000  | false | false      | 1     | false | false | false |
+| 0x38010000  | false | false      | 1     | false | true  | true  |
+| 0x38020000  | false | false      | 1     | false | false | false |
+| 0x38021000  | false | false      | 1     | true  | true  | true  |
+| 0x39000000  | false | false      | 1     | false | false | false |
+| 0x39002000  | false | false      | 1     | false | true  | true  |
+| 0x3c000000  | false | false      | 1     | false | false | false |
+| 0x80000000  | false | false      | 1     | false | true  | true  |
+| 0x480000000 | true  | true       | 1     | true  | true  | true  |
 
 ### 异常处理机制
 
@@ -393,24 +393,24 @@ PMA 寄存器的条目信息如下表
 
 MMU 可能产生的异常以及处理流程如下表
 
-| **模块** | **可能产生的异常** | **处理流程** |
-| --- | --- | --- |
-| ITLB |  |  |
-|  | 产生 inst page fault | 根据请求来源，分别交付给 Icache 或 IFU 处理 |
-|  | 产生 inst guest page fault | 根据请求来源，分别交付给 Icache 或 IFU 处理 |
-|  | 产生 inst access fault | 根据请求来源，分别交付给 Icache 或 IFU 处理 |
-| DTLB |  |  |
-|  | 产生 load page fault | 交付给 LoadUnits 进行处理 |
-|  | 产生 load guest page fault | 交付给 LoadUnits 进行处理 |
-|  | 产生 store page fault | 根据请求来源，分别交付给 StoreUnits 或 AtomicsUnit 处理 |
-|  | 产生 store guest page fault | 根据请求来源，分别交付给 StoreUnits 或 AtomicsUnit处理 |
-|  | 产生 load access fault | 交付给 LoadUnits 进行处理 |
-|  | 产生 store access fault | 根据请求来源，分别交付给 StoreUnits 或 AtomicsUnit 处理 |
-| L2 TLB |  |  |
-|  | 产生 guest page fault | 交付给 L1 TLB，L1 TLB 根据请求来源交付处理 |
-|  | 产生 page fault | 交付给 L1 TLB，L1 TLB 根据请求来源交付处理 |
-|  | 产生 access fault | 交付给 L1 TLB，L1 TLB 根据请求来源交付处理 |
-|  | ecc 校验出错 | 无效掉当前项，返回 miss 结果并重新进行 Page Walk |
+| **模块** | **可能产生的异常**          | **处理流程**                                            |
+| -------- | --------------------------- | ------------------------------------------------------- |
+| ITLB     |                             |                                                         |
+|          | 产生 inst page fault        | 根据请求来源，分别交付给 Icache 或 IFU 处理             |
+|          | 产生 inst guest page fault  | 根据请求来源，分别交付给 Icache 或 IFU 处理             |
+|          | 产生 inst access fault      | 根据请求来源，分别交付给 Icache 或 IFU 处理             |
+| DTLB     |                             |                                                         |
+|          | 产生 load page fault        | 交付给 LoadUnits 进行处理                               |
+|          | 产生 load guest page fault  | 交付给 LoadUnits 进行处理                               |
+|          | 产生 store page fault       | 根据请求来源，分别交付给 StoreUnits 或 AtomicsUnit 处理 |
+|          | 产生 store guest page fault | 根据请求来源，分别交付给 StoreUnits 或 AtomicsUnit处理  |
+|          | 产生 load access fault      | 交付给 LoadUnits 进行处理                               |
+|          | 产生 store access fault     | 根据请求来源，分别交付给 StoreUnits 或 AtomicsUnit 处理 |
+| L2 TLB   |                             |                                                         |
+|          | 产生 guest page fault       | 交付给 L1 TLB，L1 TLB 根据请求来源交付处理              |
+|          | 产生 page fault             | 交付给 L1 TLB，L1 TLB 根据请求来源交付处理              |
+|          | 产生 access fault           | 交付给 L1 TLB，L1 TLB 根据请求来源交付处理              |
+|          | ecc 校验出错                | 无效掉当前项，返回 miss 结果并重新进行 Page Walk        |
 
 另外，根据 RISC-V 手册，Page Fault 的优先级高于 Access Fault，但是如果 Page Table Walk 过程中，出现了 PMP 检查或 PMA 检查的 Access Fault，此时页表项为非法，会发生 Page Fault 和 Access Fault 一起出现的特殊情况， {{var_processor_name}} 选择报 Access Fault。其余情况下均满足 Page Fault 的优先级高于Access Fault。
 

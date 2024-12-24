@@ -17,13 +17,17 @@ CLINT 为 HART 提供 M 特权级下的软件中断，以及 M 特权级下的 t
 
 Table: CLINT 的寄存器排布
 
-| offset address	| Width	| attribute	| Description	| Notes |
-| :---------: | :------------: | :---------: | :---------: | :---------: |
-| 0x0000_0000 |	4B	| RW	| HART M 软中断	| HART M 软件中断配置寄存器(1-bit wide)。|
-| 0x0000_0004 …  0x0000_3FFF  |		|       |	Reserved	|                      |
-|0x0000_4000 |	8B	| RW	| HART M 态time中断阈值	| MTIMECMP 寄存器
-| 0x0000_4008 … 0x0000_BFF7 |		|       |	Reserved	|                      |
-| 0x0000_BFF8 | 8B  | 	RW	|  HART M 态time | 	Time 寄存器                    |
+| offset address | Width | attribute |       Description       |
+| :------------: | :---: | :-------: | :---------------------: |
+|  0x0000_0000   |  4B   |    RW     | HART M 软中断配置寄存器 |
+|  0x0000_0004   |       |           |                         |
+|       …        |       |           |        Reserved         |
+|  0x0000_3FFF   |       |           |                         |
+|  0x0000_4000   |  8B   |    RW     |     MTIMECMP 寄存器     |
+|  0x0000_4008   |       |           |                         |
+|       …        |       |           |        Reserved         |
+|  0x0000_BFF7   |       |           |                         |
+|  0x0000_BFF8   |  8B   |    RW     |      MTIME 寄存器       |
 
 
 ### IMSIC 中断控制器
@@ -42,22 +46,22 @@ RISCV AIA SPEC明确规定，多 interrupt files 场景下, Supervisor-level 只
 
 Table: M interrupt file
 
-| reg name | reg description | offset address | data width | attribute | reset value | member description |
-| :------- | :-------------- | :------------- | :--------- | :-------- | :---------- | :----------------- |
-| setipnum_le | interrupt file 访问寄存器。 | 0x0000         | 32         | WO        | 32'h0       | "interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入。" |
+| 寄存器      | 地址偏移 | 位宽 | 属性 | 复位值 | 描述                                         |
+| :---------- | :------- | :--- | :--- | :----- | :---------------------------------------- |
+| setipnum_le | 0x0000   | 32   | WO   | 32'h0  | interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入。 |
 
 
 Table: S/VS interrupt file
 
-| reg name | reg description | offset address | data width | attribute | reset value | member description |
-| :------- | :-------------- | :------------- | :--------- | :-------- | :---------- | :----------------- |
-| setipnum_le     | interrupt file 访问寄存器。     | 0x0000         | 32         | WO        | 32'h0       | "interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入。"                                              |
-| setipnum_le_s   | S interrupt file 访问寄存器。   | 0x0000         | 32         | WO        | 32'h0       | "interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入，MSI ID 超过8bit访问，硬件自动截断低8bit."      |
-| setipnum_le_vs1 | VS1 interrupt file 访问寄存器。 | 0x1000         | 32         | WO        | 32'h0       | "VS 1 interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入，MSI ID 超过8bit访问，硬件自动截断低8bit." |
-| setipnum_le_vs2 | VS2 interrupt file 访问寄存器。 | 0x2000         | 32         | WO        | 32'h0       | "VS 2 interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入，MSI ID 超过8bit访问，硬件自动截断低8bit." |
-| setipnum_le_vs3 | VS3 interrupt file 访问寄存器。 | 0x3000         | 32         | WO        | 32'h0       | "VS 3 interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入，MSI ID 超过8bit访问，硬件自动截断低8bit." |
-| setipnum_le_vs4 | VS4 interrupt file 访问寄存器。 | 0x4000         | 32         | WO        | 32'h0       | "VS 4 interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入，MSI ID 超过8bit访问，硬件自动截断低8bit." |
-| setipnum_le_vs5 | VS5 interrupt file 访问寄存器。 | 0x5000         | 32         | WO        | 32'h0       | "VS 5 interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入，MSI ID 超过8bit访问，硬件自动截断低8bit." |
+| 寄存器      | 地址偏移 | 位宽 | 属性 | 复位值 | 描述                                         |
+| :---------- | :------- | :--- | :--- | :----- | :---------------------------------------- |
+| setipnum_le     | 0x0000   | 32   | WO   | 32'h0  | interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入。                                            |
+| setipnum_le_s   | 0x0000   | 32   | WO   | 32'h0  | interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入，MSI ID 超过8bit访问，硬件自动截断低8bit.      |
+| setipnum_le_vs1 | 0x1000   | 32   | WO   | 32'h0  | VS 1 interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入，MSI ID 超过8bit访问，硬件自动截断低8bit. |
+| setipnum_le_vs2 | 0x2000   | 32   | WO   | 32'h0  | VS 2 interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入，MSI ID 超过8bit访问，硬件自动截断低8bit. |
+| setipnum_le_vs3 | 0x3000   | 32   | WO   | 32'h0  | VS 3 interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入，MSI ID 超过8bit访问，硬件自动截断低8bit. |
+| setipnum_le_vs4 | 0x4000   | 32   | WO   | 32'h0  | VS 4 interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入，MSI ID 超过8bit访问，硬件自动截断低8bit. |
+| setipnum_le_vs5 | 0x5000   | 32   | WO   | 32'h0  | VS 5 interrupt file 访问寄存器。写入数据为MSI 中断ID，读取值为0.默认支持最高8bit中断ID写入，MSI ID 超过8bit访问，硬件自动截断低8bit. |
 
 ### 核间中断
 

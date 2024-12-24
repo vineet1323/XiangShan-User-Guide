@@ -106,14 +106,14 @@ PMP 和 PMA 的最小粒度为 4KB，因此不支持 NA4 模式。
 中断控制器分为传入消息信号中断控制器（IMSIC）和处理器核局部中断控制器（CLINT）。IMSIC 默认支持 7 个
 interrupt file（M + S + 5 VS），并默认支持 254 个有效中断号。CLINT 用于处理软件中断和计时器中断。
 
-具体内容详见 [@sec:nterruption-controller] [中断控制器](nterruption-controller.md)。
+具体内容详见 [@sec:interruption-controller] [中断控制器](nterruption-controller.md)。
 
 #### 计时器
 
 计时器复用了 CLINT 中的 mtime 寄存器，计时器将计时器的值广播到各个核内子系统，以支持核内子系统读取 time
 寄存器和 Sstc 扩展等功能。
 
-具体内容详见 [@sec:nterruption-controller] [中断控制器](nterruption-controller.md)。
+具体内容详见 [@sec:interruption-controller] [中断控制器](nterruption-controller.md)。
 
 #### 调试系统
 
