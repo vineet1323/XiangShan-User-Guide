@@ -8,6 +8,7 @@ file_authors_:
 本章是 {{var_processor_name}} 的概述。 {{var_processor_name}} 是北京开源芯片研究院香山处理器团队（以下简称香山团队）研发的第三代微架构——昆明湖——的V2R2版本。
 
 昆明湖的目标是面向服务器和高性能嵌入式场景的通用CPU，计划通过三次迭代完成这一目标。
+
 - 昆明湖V1：昆明湖V1是昆明湖架构探索阶段，在原有南湖架构上做了大量重构，SPECCPU2006得分从10分提升到15分；
 - 昆明湖V2：昆明湖V2的目标依照最新RISC-V规范完善功能。具体的规范来自RVA23 profile和server SOC spec；具体标准遵从程度见后面；
 - 昆明湖V3：昆明湖V3的目标是优化单die 32-64核的多核性能，同时支持多计算die的功能。
@@ -22,7 +23,9 @@ file_authors_:
 {{var_processor_name}} 系列IP包括CPU Core(含L2)，核内中断控制器(AIA IMSIC)，Timer和Debug等模块。
 
 ### 特性 {#feature}
+
 #### 处理器核特性
+
 - 支持RV64及其扩建指令集；
 - 支持RVV 1.0，VLEN 128bit x 2；
 - 支持标量的非对齐访问，不支持向量非对齐访问；
@@ -31,6 +34,7 @@ file_authors_:
 - 支持timer中断，支持RVA23-Sstc特性；
 
 #### Cache和TLB特性
+
 - ICache 64KB，支持Parity；
 - DCache，最高64KB，支持ECC（默认关闭）；
 - Unified L2，最高1MB；
@@ -38,22 +42,26 @@ file_authors_:
 - 支持一级和二级TLB；
 
 #### 总线接口
+
 - 支持TIlelink v1总线（会员版本不包括）；
 - 支持CHI Issue B和CHI Issue E.b的子集，事务和flit字段详见总线接口章节；CHI版本配置方法见总线接口章节。
 
 #### 中断
+
 - 符合 AIA 1.0的csr；
 - 符合 AIA 1.0的IMSIC(注1)；
 - 符合RISC-V priviledge的NMI，提供一个单独的NMI信号，允许用于自行选择连接，详见中断章节。
 
 #### Debug特性
+
 - 支持DebugModule spec 0.13；
 - 支持HPM；
 - 支持E-trace(注2)
 - 综合友好的在线正确性比较（Difftest）；
 - 支持CHI最小单核验证环境；
 
-注1：AIA aplic暂不在 {{var_processor_name}} 开源清单中，如需要可与我们联系。
+注1：AIA aplic暂不在 {{var_processor_name}} 开源清单中，如需要可与我们联系;
+
 注2：E-trace核外trace IP暂不在 {{var_processor_name}} 开源清单中，如需了解可与我们联系。
 
 <!--
