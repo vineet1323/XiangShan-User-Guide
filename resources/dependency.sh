@@ -10,7 +10,10 @@ wget https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.18.0/pa
 tar -xf pandoc-crossref-Linux.tar.xz -C ~/.local/bin
 
 wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
-tlmgr install ctex setspace subfig caption
+tlmgr install ctex setspace subfig caption textpos
 # tlmgr install svg transparent ifplatform catchfile
 
+# Get Source Han Sans Fonts
 wget -O ~/.local/share/fonts/SourceHanSansCN-Regular.otf https://github.com/adobe-fonts/source-han-sans/raw/refs/heads/release/SubsetOTF/CN/SourceHanSansCN-Regular.otf
+wget -O ~/.local/share/fonts/SourceHanSansCN-Medium.otf https://github.com/adobe-fonts/source-han-sans/raw/refs/heads/release/SubsetOTF/CN/SourceHanSansCN-Medium.otf
+wget -O ~/.local/share/fonts/SourceHanSansCN-Bold.otf https://github.com/adobe-fonts/source-han-sans/raw/refs/heads/release/SubsetOTF/CN/SourceHanSansCN-Bold.otf
