@@ -2,6 +2,7 @@
 file_authors_:
 - zengjinhong <zengjinhong21@mails.ucas.ac.cn>
 - Xu Zefan <xuzefan@mail.ustc.edu.cn>
+- Tang Haojin <tanghaojin@outlook.com>
 ---
 ## 特权模式与控制状态寄存器
 
@@ -144,7 +145,6 @@ Table: {{var_processor_name}} 支持的 SRW 的 CSRs 列表
 | slvpredctl |    S    | 0x5C2 |  推测状态LOAD违例预测控制寄存器  | 推测状态分支预测控制 |
 | smblockctl |    S    | 0x5C3 |    推测状态内存阻塞控制寄存器    | 推测状态分支预测控制 |
 |   srnctl   |    S    | 0x5C4 |     推测状态运行时控制寄存器     |  推测状态运行时控制  |
-| sfetchctl |    S    | 0x9E0 |         ICACHE控制寄存器         |   ICACHE控制寄存器   |
 
 #### 监管模式只读的 CSRs
 
@@ -387,14 +387,3 @@ Table: srnctl的 bit 功能
 |   1   | speculative virtual address inv 是否开启 |   1   |
 |   2   |             wfi 指令是否开启             |   1   |
 | 其余位 |             目前其余位无功能             |   0   |
-
-#### sfetchctl
-
-sfetchctl 的地址为 0x9E0，其初始化值为下表的默认值 ，其每一 bit 的功能如下表所示
-
-Table: sfetchctl 的 bit 功能
-
-|   位   |                  功能                  | 默认值 |
-| :----: | :------------------------------------: | :----: |
-|   0   | 控制ICache ECC校验，设1代表开启ECC校验 |   0   |
-| 其余位 |            目前其余位无功能            |   0   |
