@@ -20,7 +20,7 @@ SVG_FIGS := $(wildcard docs/figs/*.svg)
 PDF_FIGS := $(patsubst docs/figs/%.svg, build/figs/%.pdf, $(SVG_FIGS))
 
 DEPS =
-DEPS += resources/meta-vars.lua
+DEPS += $(wildcard resources/*.lua)
 DEPS += resources/template.tex
 
 PANDOC_FLAGS += --variable=version:"$(VERSION)"
@@ -29,9 +29,9 @@ PANDOC_FLAGS += --top-level-division=part
 PANDOC_FLAGS += --table-of-contents
 PANDOC_FLAGS += --number-sections
 PANDOC_FLAGS += --pdf-engine=xelatex
-PANDOC_FLAGS += --lua-filter=resources/meta-vars.lua
-PANDOC_FLAGS += --lua-filter=resources/svg-to-pdf.lua
-PANDOC_FLAGS += --lua-filter=resources/remove-md-links.lua
+PANDOC_FLAGS += --lua-filter=resources/meta_vars.lua
+PANDOC_FLAGS += --lua-filter=resources/svg_to_pdf.lua
+PANDOC_FLAGS += --lua-filter=resources/remove_md_links.lua
 PANDOC_FLAGS += --filter pandoc-crossref
 PANDOC_FLAGS += --template=resources/template.tex
 
