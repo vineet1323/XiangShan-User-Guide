@@ -7,8 +7,8 @@ SVG_FIGS := $(wildcard docs/figs/*.svg)
 PDF_FIGS := $(patsubst docs/figs/%.svg, build/docs/figs/%.pdf, $(SVG_FIGS))
 
 DEPS =
-DEPS += $(wildcard resources/*.lua)
-DEPS += resources/template.tex
+DEPS += $(wildcard utils/*.lua)
+DEPS += utils/template.tex
 
 PANDOC_FLAGS += --variable=version:"$(VERSION)"
 PANDOC_FLAGS += --from=markdown+table_captions+multiline_tables+grid_tables+header_attributes-implicit_figures
@@ -16,14 +16,14 @@ PANDOC_FLAGS += --table-of-contents
 PANDOC_FLAGS += --number-sections
 PANDOC_FLAGS += --lua-filter=include-files.lua
 PANDOC_FLAGS += --metadata=include-auto
-PANDOC_FLAGS += --lua-filter=resources/meta_vars.lua
-PANDOC_FLAGS += --lua-filter=resources/remove_md_links.lua
+PANDOC_FLAGS += --lua-filter=utils/pandoc_filters/replace_variables.lua
+PANDOC_FLAGS += --lua-filter=utils/pandoc_filters/remove_md_links.lua
 PANDOC_FLAGS += --filter pandoc-crossref
 
 PANDOC_LATEX_FLAGS += --top-level-division=chapter
 PANDOC_LATEX_FLAGS += --pdf-engine=xelatex
-PANDOC_LATEX_FLAGS += --lua-filter=resources/svg_to_pdf.lua
-PANDOC_LATEX_FLAGS += --template=resources/template.tex
+PANDOC_LATEX_FLAGS += --lua-filter=utils/pandoc_filters/svg_to_pdf.lua
+PANDOC_LATEX_FLAGS += --template=utils/template.tex
 
 PANDOC_HTML_FLAGS += --embed-resources
 PANDOC_HTML_FLAGS += --shift-heading-level-by=1
