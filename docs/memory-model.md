@@ -10,7 +10,7 @@ file_authors_:
 
 ### 内存属性
 
-{{var_processor_name}} 支持三种内存类型，分别是可高速缓存内存、不可高速缓存内存和不可缓存外设。
+{{processor_name}} 支持三种内存类型，分别是可高速缓存内存、不可高速缓存内存和不可缓存外设。
 
 地址的物理内存属性（Physical Memory Attributes）由硬件规定，其支持 RISC-V 手册中所规定的属性：
 
@@ -20,7 +20,7 @@ file_authors_:
 * A（Address matching mode）：地址匹配模式
 * L（Lock Bit）：锁定状态
 
-同时 {{var_processor_name}} 还支持 atomic（支持原子指令）属性和 c（支持高速缓存）属性。
+同时 {{processor_name}} 还支持 atomic（支持原子指令）属性和 c（支持高速缓存）属性。
 
 ### 内存一致性模型
 
@@ -32,7 +32,7 @@ file_authors_:
 
 ### MMU 概述
 
-{{var_processor_name}} MMU（Memory Management Unit） 支持 RISC-V SV48 和 SV39 分页机制。其作用主要有：
+{{processor_name}} MMU（Memory Management Unit） 支持 RISC-V SV48 和 SV39 分页机制。其作用主要有：
 
 - 地址转换：将虚拟地址（48 或 39 位）转换为物理地址（48 位）；
 - 页面保护：对页面的访问者进行读/写/执行权限的检查；
@@ -43,7 +43,7 @@ file_authors_:
 
 MMU 主要利用 TLB（Translation Look-aside Buffer）来实现地址转换等功能。TLB 将 CPU 访存使用多个虚拟地址作为输入，转换前检查 TLB 的页面属性，再输出该虚拟地址对应的物理地址。
 
-{{var_processor_name}} MMU 采用两级 TLB 的组织结构，第一级为 L1 TLB，分别为指令 ITLB 与数据 DTLB；第二级为 L2 TLB。
+{{processor_name}} MMU 采用两级 TLB 的组织结构，第一级为 L1 TLB，分别为指令 ITLB 与数据 DTLB；第二级为 L2 TLB。
 
 L1 ITLB 的项配置如下表
 
@@ -70,9 +70,9 @@ L2 TLB 为指令和数据共用，L2 TLB 包含六个主要单元：
 
 ### 地址转换流程
 
-MMU 负责将虚拟地址翻译成物理地址，并用翻译得到的物理地址进行访存。 {{var_processor_name}} 支持 Sv39/Sv48 分页机制，虚拟地址长度为 39/48 位，低 12 位是页内偏移，支持 Sv39 时高 27 位分为三段（每段 9 位），也就是三级页表，支持 Sv48 时高 36 位分为四段（每段 9 位），也就是四级页表。
+MMU 负责将虚拟地址翻译成物理地址，并用翻译得到的物理地址进行访存。 {{processor_name}} 支持 Sv39/Sv48 分页机制，虚拟地址长度为 39/48 位，低 12 位是页内偏移，支持 Sv39 时高 27 位分为三段（每段 9 位），也就是三级页表，支持 Sv48 时高 36 位分为四段（每段 9 位），也就是四级页表。
 
- {{var_processor_name}} 的物理地址为 48 位，虚拟地址和物理地址的结构如图所示。遍历页表需要进行四次内存访问，需要通过 TLB 对页表做缓存。
+ {{processor_name}} 的物理地址为 48 位，虚拟地址和物理地址的结构如图所示。遍历页表需要进行四次内存访问，需要通过 TLB 对页表做缓存。
 
 ![Sv38 虚拟地址结构](figs/Sv39vaddr.svg)
 
@@ -82,11 +82,11 @@ MMU 负责将虚拟地址翻译成物理地址，并用翻译得到的物理地�
 
 在进行地址翻译时，前端取指通过 ITLB 进行地址翻译，后端访存通过 DTLB 进行地址翻译。ITLB 和 DTLB 如果 miss，会通过 Repeater 向 L2 TLB 发送请求。前端取指和后端访存对 TLB 均采用非阻塞式访问，如果 TLB 返回缺失，可以重新调度查询其他请求。
 
-{{var_processor_name}} 页表用于存储下级页表的入口地址或者最终页表的物理信息，页表结构如图 6.3 所示：
+{{processor_name}} 页表用于存储下级页表的入口地址或者最终页表的物理信息，页表结构如图 6.3 所示：
 
 ![页表结构](figs/pte.png)
 
-{{var_processor_name}} 页表结构各 bit 属性：
+{{processor_name}} 页表结构各 bit 属性：
 
 **PBMT：Page-Based Memory Types**
 
@@ -122,7 +122,7 @@ menvcfg 寄存器的 PBMTE 位）
 
 **V：Valid bit:** 表示页面有效。
 
-{{var_processor_name}} 支持 Svade 拓展，如果页面在没有设置 A 位的情况下被访问（访存或取指），或者页面在没有设置 D 位的情况下被写入，都会触发 page fault。不支持 Svadu 拓展，不会硬件更新 A/D 位。
+{{processor_name}} 支持 Svade 拓展，如果页面在没有设置 A 位的情况下被访问（访存或取指），或者页面在没有设置 D 位的情况下被写入，都会触发 page fault。不支持 Svadu 拓展，不会硬件更新 A/D 位。
 
 地址转换的详细流程描述如下，此处以 Sv39 为例：
 
@@ -138,13 +138,13 @@ CPU 要访问某个虚拟地址，若 TLB 命中，则从 TLB 中直接获取物
 5. 若得到叶子页表，但：访问类型违反 A/D/X/W/R/U-bit 的设置，产生对应的 page fault 异常；若三次访问结束仍未得到叶子页表，则产生对应的 page fault 异常；若访问 L2 Cache 过程中得到 access fault 响应，产生 page fault 异常；
 6. 若得到叶子页表，但访问次数少于 3 次，则说明得到了大页表。检查大页表的 PPN 是否按照页表尺寸对齐，若未对齐，则产生 page fault 异常。
 
-这里额外说明，{{var_processor_name}} 不允许访问建立在 MMIO 地址空间的页表。如果在页表遍历过程中，查询得到某级页表的地址位于 MMIO 空间中，会上报 access fault 异常。
+这里额外说明，{{processor_name}} 不允许访问建立在 MMIO 地址空间的页表。如果在页表遍历过程中，查询得到某级页表的地址位于 MMIO 空间中，会上报 access fault 异常。
 
 ### 虚拟化两阶段地址转换
 
-{{var_processor_name}} 支持 H 拓展，在非虚拟化模式且未执行虚拟化访存指令时，地址翻译过程与未加入 H 拓展时基本一致，在虚拟化模式或者执行虚拟化访存指令时，需要判断是否开启两阶段地址翻译。
+{{processor_name}} 支持 H 拓展，在非虚拟化模式且未执行虚拟化访存指令时，地址翻译过程与未加入 H 拓展时基本一致，在虚拟化模式或者执行虚拟化访存指令时，需要判断是否开启两阶段地址翻译。
 
-CPU 根据 vsatp 与 hgatp 开启两阶段翻译，vsatp 结构如下图所示（ {{var_processor_name}} 中 SXLEN 固定为 64）
+CPU 根据 vsatp 与 hgatp 开启两阶段翻译，vsatp 结构如下图所示（ {{processor_name}} 中 SXLEN 固定为 64）
 
 ![vsatp 结构](figs/vsatp.png)
 
@@ -155,10 +155,10 @@ hgatp 控制 G-stage 阶段翻译，hgatp 结构与翻译模式如下图所示
 | **位**  | **域** | **描述**                                                       |
 | ------- | ------ | :------------------------------------------------------------ |
 | [63:60] | MODE   | 表示地址转换的模式。该域为 0 时为 Bare mode，不开启地址翻译或地址保护，该域为 8/9 时表示 Sv39x4/Sv48x4 地址转换模式，如果该域为其他值会上报 illegal instruction fault |
-| [57:44] | VMID   | 虚拟机标识符。对于 {{var_processor_name}} 采用的 Sv39x4/Sv48x4 地址转换模式，VMID 长度最大值都为 14 |
+| [57:44] | VMID   | 虚拟机标识符。对于 {{processor_name}} 采用的 Sv39x4/Sv48x4 地址转换模式，VMID 长度最大值都为 14 |
 | [43:0]  | PPN    | 表示第二阶段翻译的根页表的物理页号，由物理地址右移 12 位得到 |
 
-{{var_processor_name}} 使用 Sv39x4/Sv48x4 分页机制，两机制的虚拟地址结构如下图所示
+{{processor_name}} 使用 Sv39x4/Sv48x4 分页机制，两机制的虚拟地址结构如下图所示
 
 ![sv39x4 虚拟地址结构](figs/sv39x4.svg)
 
@@ -176,12 +176,12 @@ VS-stage 负责将客户机虚拟地址转换成客户机物理地址，G-stage 
 
 **MMU 地址转换寄存器（SATP）**
 
-{{var_processor_name}} 架构支持长度为 16 的 ASID（地址空间标识符），在 SATP 寄存器中保存。SATP 寄存器的格式如表所示。
+{{processor_name}} 架构支持长度为 16 的 ASID（地址空间标识符），在 SATP 寄存器中保存。SATP 寄存器的格式如表所示。
 
 | **位**  | **域** | **描述**                                                       |
 | ------- | ------ | :------------------------------------------------------------ |
 | [63:60] | MODE | 表示地址转换的模式。该域为 0 时为 Bare mode，不开启地址翻译或地址保护，该域为 8/9 时表示 Sv39/Sv48 地址转换模式，如果该域为其他值会上报 illegal instruction fault |
-| [59:44] | ASID | 地址空间标识符。ASID 的长度可参数化配置，对于 {{var_processor_name}} 采用的 Sv39/Sv48 地址转换模式，ASID 长度最大值为 16 |
+| [59:44] | ASID | 地址空间标识符。ASID 的长度可参数化配置，对于 {{processor_name}} 采用的 Sv39/Sv48 地址转换模式，ASID 长度最大值为 16 |
 | [43:0] | PPN | 表示根页表的物理页号，由物理地址右移 12 位得到 |
 
 在虚拟化模式下，SATP 将被 VSATP 寄存器代替，并且其中的PPN为客户机根页表的客户机物理页号，而非真实的物理地址，需要进行第二阶段翻译才能得到真实物理地址。
@@ -190,13 +190,13 @@ VS-stage 负责将客户机虚拟地址转换成客户机物理地址，G-stage 
 
 ### PMP概述
 
-{{var_processor_name}} 遵从 RISC-V 标准。PMP（Physical Memory Protection）单元负责对物理地址的访问权限进行检查，判定当前工作模式下 CPU 是否具备对该地址的读/写/执行权限。
+{{processor_name}} 遵从 RISC-V 标准。PMP（Physical Memory Protection）单元负责对物理地址的访问权限进行检查，判定当前工作模式下 CPU 是否具备对该地址的读/写/执行权限。
 
 PMA（Physical Memory Attributes）单元的作用是定义物理内存的属性。它主要负责指定内存区域的类型，定义内存访问特性与控制内存访问的行为。
 
 PMA 与 PMP 配合使用，共同管理和控制物理内存的访问和属性，确保系统的安全性和性能。
 
-{{var_processor_name}} PMP&PMA 单元的设计规格有：
+{{processor_name}} PMP&PMA 单元的设计规格有：
 
 - 支持物理地址保护；
 - 支持物理地址属性；
@@ -206,7 +206,7 @@ PMA 与 PMP 配合使用，共同管理和控制物理内存的访问和属性�
 
 ### PMP 控制寄存器
 
-{{var_processor_name}} 默认 PMP 为 16 项，可以通过参数化修改，采用分布复制式实现方法。PMP 表项主要由一个 8bit 的配置寄存器与一个 64bit 的地址寄存器构成，默认没有初始值。
+{{processor_name}} 默认 PMP 为 16 项，可以通过参数化修改，采用分布复制式实现方法。PMP 表项主要由一个 8bit 的配置寄存器与一个 64bit 的地址寄存器构成，默认没有初始值。
 
 PMP 寄存器的地址空间如下表
 
@@ -389,7 +389,7 @@ PMA 寄存器的条目信息如下表
 
 ## 异常处理机制
 
-{{var_processor_name}} MMU 模块可能产生 4 种异常，包括 guest page fault、page fault、access fault以及 L2 TLB page cache 的 ECC 校验出错。根据请求来源分别交付给对应模块处理。
+{{processor_name}} MMU 模块可能产生 4 种异常，包括 guest page fault、page fault、access fault以及 L2 TLB page cache 的 ECC 校验出错。根据请求来源分别交付给对应模块处理。
 
 MMU 可能产生的异常以及处理流程如下表
 
@@ -412,11 +412,11 @@ MMU 可能产生的异常以及处理流程如下表
 |          | 产生 access fault           | 交付给 L1 TLB，L1 TLB 根据请求来源交付处理              |
 |          | ecc 校验出错                | 无效掉当前项，返回 miss 结果并重新进行 Page Walk        |
 
-另外，根据 RISC-V 手册，Page Fault 的优先级高于 Access Fault，但是如果 Page Table Walk 过程中，出现了 PMP 检查或 PMA 检查的 Access Fault，此时页表项为非法，会发生 Page Fault 和 Access Fault 一起出现的特殊情况， {{var_processor_name}} 选择报 Access Fault。其余情况下均满足 Page Fault 的优先级高于Access Fault。
+另外，根据 RISC-V 手册，Page Fault 的优先级高于 Access Fault，但是如果 Page Table Walk 过程中，出现了 PMP 检查或 PMA 检查的 Access Fault，此时页表项为非法，会发生 Page Fault 和 Access Fault 一起出现的特殊情况， {{processor_name}} 选择报 Access Fault。其余情况下均满足 Page Fault 的优先级高于Access Fault。
 
 ## 内存访问顺序
 
-在不同的场景下， {{var_processor_name}} 对地址空间的访问过程不同，简要归纳如下：
+在不同的场景下， {{processor_name}} 对地址空间的访问过程不同，简要归纳如下：
 
 场景1：CPU 不进行 VA-PA 转换
 

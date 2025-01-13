@@ -7,20 +7,20 @@ file_authors_:
 
 ## 结构框图
 
-{{var_processor_name}} 的结构框图如 [@fig:kmh-multicore] 所示。
+{{processor_name}} 的结构框图如 [@fig:kmh-multicore] 所示。
 
-![{{var_processor_name}} 微架构框图](figs/kmh-multicore.svg){#fig:kmh-multicore}
+![{{processor_name}} 微架构框图](figs/kmh-multicore.svg){#fig:kmh-multicore}
 
 ## 核内子系统
 
-{{var_processor_name}} 的核内子系统主要包括：取指令单元（IFU）、指令译码单元（IDU）、重命名单元（Rename）、
+{{processor_name}} 的核内子系统主要包括：取指令单元（IFU）、指令译码单元（IDU）、重命名单元（Rename）、
 乱序调度单元（Dispatch and Issue）、整数运算单元（IntExu）、浮点运算单元（FPExu）、向量运算单元（VecExu）、
 存储单元（LSU）、重排序缓存（ROB）、内存管理单元（MMU）、物理内存保护单元（PMP/PMA）和二级高速缓存（L2 Cache）。
 
 ### 取指令单元
 
 取指令单元负责从存储中提取指令并对指令进行初步处理，每周期最多可处理 32 字节的指令。为了提高取指令的效率，
-{{var_processor_name}} 实现了诸如 ICache、FDIP、BPU 等多种结构，具有低功耗、
+{{processor_name}} 实现了诸如 ICache、FDIP、BPU 等多种结构，具有低功耗、
 高分支预测准确率和高指令预取准确率的特点。
 
 ### 指令译码单元
@@ -99,7 +99,7 @@ PMP 和 PMA 的最小粒度为 4KB，因此不支持 NA4 模式。
 
 ## 多核子系统
 
-{{var_processor_name}} 的多核子系统包括中断控制器、计时器和调试系统。
+{{processor_name}} 的多核子系统包括中断控制器、计时器和调试系统。
 
 ### 中断控制器
 

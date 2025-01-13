@@ -9,9 +9,9 @@ file_authors_:
 
 ## 处理器模式
 
-{{var_processor_name}} 支持 RISC-V 特权架构手册规定的以下 6 种特权模式。
+{{processor_name}} 支持 RISC-V 特权架构手册规定的以下 6 种特权模式。
 
-Table: {{var_processor_name}} 支持的特权模式列表
+Table: {{processor_name}} 支持的特权模式列表
 
 | 名称                                    | 缩写 | PRV | V |
 | --------------------------------------- | :--: | :-: | :-: |
@@ -22,7 +22,7 @@ Table: {{var_processor_name}} 支持的特权模式列表
 | 虚拟用户模式（Virtual user mode）       |  VU  |  0  | 1 |
 | 调试模式（Debug mode）                  |  D  |    |  |
 
-{{var_processor_name}} 初始化时处在 M 模式。对于一般场景，各模式权限高低为 M > S > U；对于虚拟化场景，各模式权限高低为 M > HS > VS > VU。
+{{processor_name}} 初始化时处在 M 模式。对于一般场景，各模式权限高低为 M > S > U；对于虚拟化场景，各模式权限高低为 M > HS > VS > VU。
 
 ### 机器模式
 
@@ -85,9 +85,9 @@ Table: {{var_processor_name}} 支持的特权模式列表
 
 ### 用户模式可读写的 CSRs
 
-{{var_processor_name}} 中实现的权限为用户模式可读写（URW）的 RISC-V 的 CSRs 如下表所示：
+{{processor_name}} 中实现的权限为用户模式可读写（URW）的 RISC-V 的 CSRs 如下表所示：
 
-Table: {{var_processor_name}} 支持的 URW 的 CSRs 列表
+Table: {{processor_name}} 支持的 URW 的 CSRs 列表
 
 |  名称  | 特权级 | 编号 |          描述          |    组别    |
 | :----: | :----: | :---: | :--------------------: | :--------: |
@@ -104,9 +104,9 @@ Table: {{var_processor_name}} 支持的 URW 的 CSRs 列表
 
 ### 用户模式只读的 CSRs
 
-{{var_processor_name}} 中实现的权限为用户模式只读（URO）的 RISC-V 的 CSRs 如下表所示：
+{{processor_name}} 中实现的权限为用户模式只读（URO）的 RISC-V 的 CSRs 如下表所示：
 
-Table: {{var_processor_name}} 支持的 URO 的 CSRs 列表
+Table: {{processor_name}} 支持的 URO 的 CSRs 列表
 
 |     名称     | 特权级 | 编号 |          描述          |      组别      |
 | :----------: | :----: | :---: | :--------------------: | :------------: |
@@ -119,9 +119,9 @@ Table: {{var_processor_name}} 支持的 URO 的 CSRs 列表
 
 ### 监管模式可读写的 CSRs
 
-{{var_processor_name}} 中实现的权限为监管模式可读写（SRW）的 RISC-V 的 CSRs 如下表所示：
+{{processor_name}} 中实现的权限为监管模式可读写（SRW）的 RISC-V 的 CSRs 如下表所示：
 
-Table: {{var_processor_name}} 支持的 SRW 的 CSRs 列表
+Table: {{processor_name}} 支持的 SRW 的 CSRs 列表
 
 |    名称    | 特权级 | 编号 |               描述               |         组别         |
 | :--------: | :-----: | :---: | :------------------------------: | :------------------: |
@@ -149,9 +149,9 @@ Table: {{var_processor_name}} 支持的 SRW 的 CSRs 列表
 
 ### 监管模式只读的 CSRs
 
-{{var_processor_name}} 中实现的权限为监管模式只读（SRO）的 RISC-V 的 CSRs 如下表所示：
+{{processor_name}} 中实现的权限为监管模式只读（SRO）的 RISC-V 的 CSRs 如下表所示：
 
-Table: {{var_processor_name}} 支持的 SRO 的 CSRs 列表
+Table: {{processor_name}} 支持的 SRO 的 CSRs 列表
 
 | 名称 | 特权级 | 编号 |       描述       |   组别   |
 | :---: | :----: | :---: | :--------------: | :------: |
@@ -159,9 +159,9 @@ Table: {{var_processor_name}} 支持的 SRO 的 CSRs 列表
 
 ### 虚拟监管模式可读写的 CSRs
 
-{{var_processor_name}} 中实现的权限为虚拟监管模式可读写（HRW）的 RISC-V 的 CSRs 如下表所示：
+{{processor_name}} 中实现的权限为虚拟监管模式可读写（HRW）的 RISC-V 的 CSRs 如下表所示：
 
-Table: {{var_processor_name}} 支持的 HRW 的 CSRs 列表
+Table: {{processor_name}} 支持的 HRW 的 CSRs 列表
 
 |    名称    |  特权级  | 编号 |                 描述                 |          组别          |
 | :--------: | :------: | :---: | :----------------------------------: | :--------------------: |
@@ -199,9 +199,9 @@ Table: {{var_processor_name}} 支持的 HRW 的 CSRs 列表
 
 ### 虚拟监管模式只读的 CSRs
 
-{{var_processor_name}} 中实现的权限为虚拟监管模式只读（HRO）的 RISC-V 的 CSRs 如下表所示：
+{{processor_name}} 中实现的权限为虚拟监管模式只读（HRO）的 RISC-V 的 CSRs 如下表所示：
 
-Table: {{var_processor_name}} 支持的 HRO 的 CSRs 列表
+Table: {{processor_name}} 支持的 HRO 的 CSRs 列表
 
 |  名称  | 特权级 | 编号 |                描述                |      组别      |
 | :----: | :----: | :---: | :--------------------------------: | :------------: |
@@ -210,9 +210,9 @@ Table: {{var_processor_name}} 支持的 HRO 的 CSRs 列表
 
 ### 机器模式可读写的 CSRs
 
-{{var_processor_name}} 中实现的权限为机器模式可读写（MRW）的 RISC-V 的 CSRs 如下表所示：
+{{processor_name}} 中实现的权限为机器模式可读写（MRW）的 RISC-V 的 CSRs 如下表所示：
 
-Table: {{var_processor_name}} 支持的 MRW 的 CSRs 列表
+Table: {{processor_name}} 支持的 MRW 的 CSRs 列表
 
 |     名称     | 特权级 | 编号 |                  描述                  |         组别         |
 | :-----------: | :-----: | :---: | :------------------------------------: | :------------------: |
@@ -273,9 +273,9 @@ Table: {{var_processor_name}} 支持的 MRW 的 CSRs 列表
 
 ### 机器模式只读的 CSRs
 
-{{var_processor_name}} 中实现的权限为机器模式只读（MRO）的 RISC-V 的 CSRs 如下表所示：
+{{processor_name}} 中实现的权限为机器模式只读（MRO）的 RISC-V 的 CSRs 如下表所示：
 
-Table: {{var_processor_name}} 支持的 MRO 的 CSRs 列表
+Table: {{processor_name}} 支持的 MRO 的 CSRs 列表
 
 |    名称    | 特权级 | 编号 |            描述            |     组别     |
 | :--------: | :----: | :---: | :------------------------: | :----------: |
@@ -288,9 +288,9 @@ Table: {{var_processor_name}} 支持的 MRO 的 CSRs 列表
 
 ### 调试模式可读写的 CSRs
 
-{{var_processor_name}} 中实现的权限为调试模式可读写（DRW）的 RISC-V 的 CSRs 如下表所示：
+{{processor_name}} 中实现的权限为调试模式可读写（DRW）的 RISC-V 的 CSRs 如下表所示：
 
-Table: {{var_processor_name}} 支持的 DRW 的 CSRs 列表
+Table: {{processor_name}} 支持的 DRW 的 CSRs 列表
 
 |   名称   | 特权级 | 编号 |           描述           |      组别      |
 | :-------: | :----: | :---: | :----------------------: | :------------: |
@@ -301,7 +301,7 @@ Table: {{var_processor_name}} 支持的 DRW 的 CSRs 列表
 
 ## 自定义 CSRs（Custom CSRs）
 
-在上述实现的控制状态寄存器表中可以发现， {{var_processor_name}} 扩展了 RISC-V 的 CSRs，实现了一些 RISC-V 手册中未定义的 CSR，下面将对这些 CSR 进行介绍。
+在上述实现的控制状态寄存器表中可以发现， {{processor_name}} 扩展了 RISC-V 的 CSRs，实现了一些 RISC-V 手册中未定义的 CSR，下面将对这些 CSR 进行介绍。
 
 ### sbpctl
 

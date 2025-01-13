@@ -9,7 +9,7 @@ title-line2: "用户手册"
 author: "香山团队·北京开源芯片研究院"
 date: "\\today"
 replace_variables:
-  var_processor_name: "昆明湖 V2R2"
+  processor_name: "昆明湖 V2R2"
 figureTitle: "图"
 tableTitle: "表"
 listingTitle: "代码"

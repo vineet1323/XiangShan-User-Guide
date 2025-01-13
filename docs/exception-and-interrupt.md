@@ -23,9 +23,9 @@ file_authors_:
 
 ## 异常
 
-{{var_processor_name}} 支持多种异常，如下表所示：
+{{processor_name}} 支持多种异常，如下表所示：
 
-Table: {{var_processor_name}} 支持的异常列表
+Table: {{processor_name}} 支持的异常列表
 
 | 异常编号 |               trap原因               |      tval更新值      |    tval2更新值    |
 | :------: | :----------------------------------: | :-------------------: | :---------------: |
@@ -81,9 +81,9 @@ Table: {{var_processor_name}} 支持的异常列表
 
 ## 中断
 
-{{var_processor_name}} 支持多种中断，如下表所示：
+{{processor_name}} 支持多种中断，如下表所示：
 
-Table: {{var_processor_name}} 支持的中断列表
+Table: {{processor_name}} 支持的中断列表
 
 | 中断编号 |            trap原因            |
 | :------: | :----------------------------: |
@@ -107,9 +107,9 @@ Table: {{var_processor_name}} 支持的中断列表
 
 ### 中断优先级
 
-{{var_processor_name}} 的中断优先级，如下表所示：
+{{processor_name}} 的中断优先级，如下表所示：
 
-Table: {{var_processor_name}} 中断优先级
+Table: {{processor_name}} 中断优先级
 
 | 中断优先级 |      组别      | 编号       | 描述                               |
 | :--------: | :------------: | ---------- | ---------------------------------- |

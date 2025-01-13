@@ -5,12 +5,12 @@ file_authors_:
 
 # 总线接口 {#sec:bus-interface}
 
-{{var_processor_name}} 的总线接口具有 256 位宽度，支持 CHI Issue B 或 Issue E.b 的子集。
+{{processor_name}} 的总线接口具有 256 位宽度，支持 CHI Issue B 或 Issue E.b 的子集。
 关于该协议的详细内容，请参考 AMBA® CHI Architecture Specification。
 
 ## 支持的响应类型
 
-CHI 协议的 RespErr 可以表示响应正常或是错误。 {{var_processor_name}} 支持的响应类型如下。
+CHI 协议的 RespErr 可以表示响应正常或是错误。 {{processor_name}} 支持的响应类型如下。
 
 | RespErr的值 | 响应类型                 |
 | :---------: | ----------------------- |
@@ -18,7 +18,7 @@ CHI 协议的 RespErr 可以表示响应正常或是错误。 {{var_processor_na
 | 0b01        | Exclusive Okay          |
 | 0x11        | Non-data Error，即 NDERR |
 
-由于 {{var_processor_name}} 不具有数据校验码，因此不支持 DERR。
+由于 {{processor_name}} 不具有数据校验码，因此不支持 DERR。
 
 ## 不同总线响应下的行为
 
@@ -36,7 +36,7 @@ CHI 使用不同的通道传输不同的消息，传输的消息包括：
 * 监听（SNP）
 
 以 TX 字母为前缀的通道用于发送消息，以 RX 字母为前缀的通道用于接收消息。
-{{var_processor_name}} 一共有 6 个通道：
+{{processor_name}} 一共有 6 个通道：
 
 * RXDAT
 * RXRSP

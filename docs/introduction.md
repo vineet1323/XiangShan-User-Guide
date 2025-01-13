@@ -5,7 +5,7 @@ file_authors_:
 
 # 概述 {#sec:introduction}
 
-本章是 {{var_processor_name}} 的概述。 {{var_processor_name}} 是北京开源芯片研究院香山处理器团队（以下简称香山团队）研发的第三代微架构——昆明湖——的 V2R2 版本。
+本章是 {{processor_name}} 的概述。 {{processor_name}} 是北京开源芯片研究院香山处理器团队（以下简称香山团队）研发的第三代微架构——昆明湖——的 V2R2 版本。
 
 昆明湖的目标是面向服务器和高性能嵌入式场景的通用 CPU，计划通过三次迭代完成这一目标。
 
@@ -13,14 +13,14 @@ file_authors_:
 - 昆明湖 V2：昆明湖 V2 的目标依照最新 RISC-V 规范完善功能，具体的规范来自 RVA23 profile 和 server SOC spec
 - 昆明湖 V3：昆明湖 V3 的目标是优化单 die 32-64 核的多核性能，同时支持多计算die的功能
 
-当前版本为 {{var_processor_name}} ，计划通过 2-3 个 Release 版本完成上述目标，昆明湖整体特性见本章 [特性](#feature) 小节，具体规范和指令集支持情况见 [@sec:instruction-set] [指令集](instruction-set.md)。
+当前版本为 {{processor_name}} ，计划通过 2-3 个 Release 版本完成上述目标，昆明湖整体特性见本章 [特性](#feature) 小节，具体规范和指令集支持情况见 [@sec:instruction-set] [指令集](instruction-set.md)。
 
 为了支持昆明湖的研发和在目标场景落地，香山团队持续开发迭代其它相关组件，包括性能模拟器 xs-gem5，指令集仿真器 NEMU，在线比较框架 difftest 等。本文是昆明湖处理器和 CPU 核相关 IP 的说明，其它组件见相应文档。
 
 ## 简介
-如上所述， {{var_processor_name}} 是香山的重要组成部分。与昆明湖 V1 和昆明湖 V2R1 相比，增加了大量符合 RISC-V 规范的指令和 IP；与昆明湖 V2R1 相比，是香山系列 IP 中首个支持 CHI 协议的 IP。
+如上所述， {{processor_name}} 是香山的重要组成部分。与昆明湖 V1 和昆明湖 V2R1 相比，增加了大量符合 RISC-V 规范的指令和 IP；与昆明湖 V2R1 相比，是香山系列 IP 中首个支持 CHI 协议的 IP。
 
-{{var_processor_name}} 系列 IP 包括 CPU Core（含L2），核内中断控制器（AIA IMSIC），Timer 和 Debug 等模块。
+{{processor_name}} 系列 IP 包括 CPU Core（含L2），核内中断控制器（AIA IMSIC），Timer 和 Debug 等模块。
 
 ## 特性 {#sec:feature}
 
@@ -38,7 +38,7 @@ file_authors_:
 - ICache 64KB，支持 Parity
 - DCache，最高 64KB，支持 ECC
 - Unified L2，最高 1MB，支持 ECC
-- L2 作为 {{var_processor_name}} 的总线出口，不支持关闭
+- L2 作为 {{processor_name}} 的总线出口，不支持关闭
 - 支持一级和二级 TLB
 
 ### 总线接口
@@ -60,9 +60,9 @@ file_authors_:
 - 在线正确性比较（Difftest）；
 - 支持 CHI 最小单核验证环境；
 
-注1：AIA aplic 暂不在 {{var_processor_name}} 开源清单中，如需要可与我们联系;
+注1：AIA aplic 暂不在 {{processor_name}} 开源清单中，如需要可与我们联系;
 
-注2：E-trace 核外 trace IP 暂不在 {{var_processor_name}} 开源清单中，如需了解可与我们联系。
+注2：E-trace 核外 trace IP 暂不在 {{processor_name}} 开源清单中，如需了解可与我们联系。
 
 <!--
 ## 可配置选项
