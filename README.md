@@ -24,7 +24,7 @@ MkDocs is used to build and deploy a static website on the internet
 
 ```bash
 # Install dependencies
-pip install -r requirements.txt
+pip install -r ./utils/requirements.txt
 
 # Preview the website
 mkdocs serve
