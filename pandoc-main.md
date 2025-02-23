@@ -27,7 +27,6 @@ i18n-applicable: "适用于"
 
 
 ``` {.include}
-docs/index.md
 docs/introduction.md
 docs/processor.md
 docs/instruction-set.md
