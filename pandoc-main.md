@@ -25,17 +25,5 @@ i18n-applicable: "适用于"
 
 
 ``` {.include}
-docs/introduction.md
-docs/processor.md
-docs/instruction-set.md
-docs/registers.md
-docs/mode-and-csr.md
-docs/exception-and-interrupt.md
-docs/memory-model.md
-docs/memory-subsystem.md
-docs/vector.md
-docs/interruption-controller.md
-docs/bus-interface.md
-docs/debug.md
-docs/performance-monitor.md
+docs/.index.md
 ```
