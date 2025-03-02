@@ -13,7 +13,7 @@ file_authors_:
 - 昆明湖 V2：昆明湖 V2 的目标依照最新 RISC-V 规范完善功能，具体的规范来自 RVA23 profile 和 server SOC spec
 - 昆明湖 V3：昆明湖 V3 的目标是优化单 die 32-64 核的多核性能，同时支持多计算die的功能
 
-当前版本为 {{processor_name}} ，计划通过 2-3 个 Release 版本完成上述目标，昆明湖整体特性见本章 [特性](#feature) 小节，具体规范和指令集支持情况见 [@sec:instruction-set] [指令集](instruction-set.md)。
+当前版本为 {{processor_name}} ，计划通过 2-3 个 Release 版本完成上述目标，昆明湖整体特性见本章 [特性](#sec:feature) 小节，具体规范和指令集支持情况见 [@sec:instruction-set] [指令集](instruction-set.md)。
 
 为了支持昆明湖的研发和在目标场景落地，香山团队持续开发迭代其它相关组件，包括性能模拟器 xs-gem5，指令集仿真器 NEMU，在线比较框架 difftest 等。本文是昆明湖处理器和 CPU 核相关 IP 的说明，其它组件见相应文档。
 

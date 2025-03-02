@@ -14,7 +14,16 @@ Pandoc is used to build PDF and single-page HTML documents.
 # Install dependencies
 bash ./utils/dependency.sh
 
-# Build
+# Build PDF
+make pdf
+
+# Build PDF for print
+make pdf TWOSIDE=1
+
+# Build HTML (not ready)
+make html
+
+# Build default format (PDF)
 make
 ```
 
@@ -23,6 +32,10 @@ make
 MkDocs is used to build and deploy a static website on the internet
 
 ```bash
+# Create and Activate Python Virtual Environments (Recommended)
+python3 -m venv .venv
+source .venv/bin/activate
+
 # Install dependencies
 pip install -r ./utils/requirements.txt
 

@@ -27,16 +27,13 @@ jobs:
           HOME: /root
         run: |
           git config --global --add safe.directory $(pwd)
-          make
+          make pdf
+          make pdf TWOSIDE=1
 
       - name: Upload built pdf
         uses: actions/upload-artifact@v4
         with:
           name: xiangshan-user-guide-pdf
-          path: xiangshan-user-guide.pdf
-
-      - name: Upload built html
-        uses: actions/upload-artifact@v4
-        with:
-          name: xiangshan-user-guide-html
-          path: xiangshan-user-guide.html
+          path: |
+            xiangshan-user-guide.pdf
+            xiangshan-user-guide-twoside.pdf

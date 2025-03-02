@@ -12,7 +12,16 @@ Pandoc 用于构建 PDF 和单页 HTML 格式的文档。
 # 安装依赖
 bash ./utils/dependency.sh
 
-# 执行构建
+# 构建 PDF
+make pdf
+
+# 构建用于打印的 PDF
+make pdf TWOSIDE=1
+
+# 构建 HTML（暂不可用）
+make html
+
+# 执行默认构建（PDF）
 make
 ```
 
@@ -21,6 +30,10 @@ make
 MkDocs 用来构建部署于互联网的静态网站。
 
 ```bash
+# 创建并激活 Python 虚拟环境（推荐）
+python3 -m venv .venv
+source .venv/bin/activate
+
 # 安装依赖
 pip install -r requirements.txt
 

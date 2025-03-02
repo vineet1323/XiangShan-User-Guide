@@ -1,10 +1,13 @@
 build/
 site/
 venv/
+.venv/
 *.aux
 *.log
 *.pdf
 *.toc
+*.lof
+*.lot
 *.tex
 *.html
 
