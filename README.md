@@ -1,4 +1,4 @@
-# XiangShan User Guide
+# XiangShan User Guide (English Version)
 
 ![build via pandoc](https://github.com/OpenXiangShan/XiangShan-User-Guide/actions/workflows/build-pandoc.yml/badge.svg)
 
