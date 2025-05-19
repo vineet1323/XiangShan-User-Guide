@@ -1,24 +1,25 @@
-# 前言 {.unnumbered .unlisted}
+# Preface {.unnumbered .unlisted}
 
-本文档为《香山开源处理器用户手册》，适用于 {{processor_name}} 。
+This document is the Xiangshan Open Source Processor User Manual, applicable to {{processor_name}} .
 
-您可从以下渠道获取最新版的本文档：
+You can obtain the latest version of this document from the following channels:
 
-* 网页版：[https://docs.xiangshan.cc/projects/user-guide/](https://docs.xiangshan.cc/projects/user-guide/)
-* PDF 文件：[https://github.com/OpenXiangShan/XiangShan-User-Guide/releases](https://github.com/OpenXiangShan/XiangShan-User-Guide/releases)
+* Web version: [https://docs.xiangshan.cc/projects/user-guide/](https://docs.xiangshan.cc/projects/user-guide/)
 
-您可访问香山文档网站 [docs.xiangshan.cc](https://docs.xiangshan.cc/) 获取更多文档。
+* PDF file: [https://github.com/OpenXiangShan/XiangShan-User-Guide/releases](https://github.com/OpenXiangShan/XiangShan-User-Guide/releases)
 
-## 声明 {.unnumbered .unlisted}
+You can visit the Xiangshan documentation website [docs.xiangshan.cc](https://docs.xiangshan.cc/) to obtain more documents.
 
-版权所有 © 2024 - 2025 香山开源处理器团队·北京开源芯片研究院
+ ## Statement {.unnumbered .unlisted}
 
-本文档采用“[知识共享 署名 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans)”协议公开发布。您可以根据该协议的规定，自由地使用、修改、分发本文档，但必须给出恰当的署名、表明原始许可协议、标注是否对原始文档作了修改。具体许可条款以知识共享组织公布的完整法律文本为准。
+Copyright © 2024 - 2025 Xiangshan Open Source Processor Team · Beijing Open Source Chip Research Institute
 
-本文档仅提供阶段性信息，可能不定期根据实际情况更新。除非另有约定，本文档中的所有陈述、信息和建议不构成任何明示或暗示的担保。
+This document is published under the "[Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans)" agreement. You can freely use, modify, and distribute this document in accordance with the provisions of the agreement, but you must give appropriate attribution, indicate the original license agreement, and mark whether the original document has been modified. The specific license terms are subject to the complete legal text published by the Creative Commons organization.
 
-## 版本历史 {.unnumbered .unlisted}
+This document only provides interim information and may be updated from time to time based on actual conditions. Unless otherwise agreed, all statements, information, and recommendations in this document do not constitute any express or implied warranty.
 
-| 日期       | 版本   | 说明       |
+ ## Version History {.unnumbered .unlisted}
+
+| Date | Version | Description |
 | ---------- | ------ | ---------- |
-| 2025-01-16 | alpha1 | 第一次发布 |
+| 2025-01-16 | alpha1 | First Release |
